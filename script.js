@@ -269,7 +269,11 @@ function enviarPedido(e) {
   const btn = document.querySelector(".btn");
   btn.disabled = true;
   btn.textContent = "⏳ Enviando...";
-  setTimeout(() => { btn.disabled = false; btn.textContent = "📲 Enviar Pedido por WhatsApp"; }, 5000);
+  setTimeout(() => {
+    btn.disabled = false;
+    btn.textContent = "📲 Enviar Pedido por WhatsApp";
+    location.reload();
+  }, 2000);
 
   window.location.href = "https://wa.me/573208940361?text=" + encodeURIComponent(msg);
 }
