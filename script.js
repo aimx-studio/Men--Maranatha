@@ -187,7 +187,7 @@ function enviarPedido(e) {
     const cantidad = Number(item.querySelector(".cantidad")?.value) || 0;
     if (cantidad <= 0) return;
 
-    let nombre_plato = cb.value;
+    let nombre_plato = cb.value.replace(/\s*\[.*?\]/g, "").trim();
 
     const sabor = item.querySelector(".sabor");
     if (sabor) nombre_plato += " (" + sabor.value + ")";
