@@ -257,7 +257,7 @@ function enviarPedido(e) {
   formData.append('entry.1463267517', tipoPago);
   formData.append('entry.1898452928', efectivo);
   formData.append('entry.1481578597', especificaciones);
-  formData.append('entry.1852319897', "$" + parseInt(total).toLocaleString("es-CO"));
+  formData.append('entry.1852319897', parseInt(total) + " COP");
 
   fetch('https://docs.google.com/forms/d/e/1FAIpQLScBiAzvvNf7r93eqDNaTvRur10Iv5LkdcPWEV0JzckU9Xy0WA/formResponse', {
     method: 'POST',
