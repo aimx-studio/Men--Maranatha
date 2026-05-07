@@ -56,25 +56,51 @@ function toggleDescripcion(checkbox) {
 }
 
  function limitarSaboresPizza(saborCb) {
-  const limites = { "18000": 2, "53000": 2, "63000": 3, "90000": 4 };
   const item = saborCb.closest(".item");
   const tamano = item.querySelector(".tamano");
+  const limites = { "18000": 2, "53000": 2, "63000": 3, "90000": 4 };
   const limite = limites[tamano?.value] || 2;
   const marcados = [...item.querySelectorAll('input[name="sabores-pizza[]"]:checked')];
-
   if (marcados.length > limite) {
     saborCb.checked = false;
-    // Mostrar aviso inline
-    let aviso = item.querySelector(".aviso-sabores");
-    if (!aviso) {
-      aviso = document.createElement("p");
-      aviso.className = "aviso-sabores";
-      aviso.style.cssText = "color:#f5a623;font-size:11px;padding:4px 13px 6px 37px;margin:0;";
-      item.querySelector(".sabores-pizza-wrap").before(aviso);
-    }
-    aviso.textContent = `⚠️ Este tamaño solo permite ${limite} sabor${limite > 1 ? "es" : ""}.`;
-    setTimeout(() => { aviso.textContent = ""; }, 2500);
   }
+  actualizarContadorSabores(item);
+}
+
+function actualizarContadorSabores(item) {
+  const limites = { "18000": 2, "53000": 2, "63000": 3, "90000": 4 };
+  const tamano = item.querySelector(".tamano");
+  const limite = limites[tamano?.value] || 2;
+  const marcados = [...item.querySelectorAll('input[name="sabores-pizza[]"]:checked')].length;
+
+  let contador = item.querySelector(".contador-sabores");
+  if (!contador) {
+    contador = document.createElement("p");
+    contador.className = "contador-sabores";
+    contador.style.cssText = "font-size:12px;margin:0 0 8px 0;padding:5px 10px;border-radius:5px;font-weight:600;";
+    item.querySelector(".sabores-pizza-wrap").before(contador);
+  }
+
+  if (marcados >= limite) {
+    contador.style.background = "rgba(245,166,35,0.15)";
+    contador.style.color = "#f5a623";
+    contador.textContent = `✅ ${marcados}/${limite} sabores seleccionados — máximo alcanzado`;
+  } else {
+    contador.style.background = "rgba(255,255,255,0.05)";
+    contador.style.color = "rgba(242,237,228,0.7)";
+    contador.textContent = `🍕 ${marcados}/${limite} sabores — elige ${limite - marcados} más`;
+  }
+
+  item.querySelectorAll('input[name="sabores-pizza[]"]').forEach(cb => {
+    const pill = cb.closest(".sabor-pill");
+    if (!cb.checked && marcados >= limite) {
+      pill.style.opacity = "0.35";
+      pill.style.pointerEvents = "none";
+    } else {
+      pill.style.opacity = "1";
+      pill.style.pointerEvents = "auto";
+    }
+  });
 }
 
 function calcularTotal() {
@@ -105,6 +131,8 @@ function calcularTotal() {
 
   document.getElementById("total").innerText = "$" + total.toLocaleString("es-CO");
   document.getElementById("totalPedido").value = total;
+  const pizzaItem = document.querySelector('[name="Pizza"]')?.closest(".item");
+  if (pizzaItem) actualizarContadorSabores(pizzaItem);
 }
 
 // ===== LÓGICA ENTREGA =====
@@ -214,9 +242,10 @@ function enviarPedido(e) {
   msg += `\n💳 *Forma de Pago:* ${tipoPago}\n`;
   if (tipoPago === "Efectivo" && efectivo) msg += `💵 *Paga con:* ${efectivo}\n`;
   if (tipoEntrega === "A domicilio" && zonaValor > 0) {
-    msg += `\n🛵 *Domicilio (${barrioTexto} - $${zonaValor.toLocaleString("es-CO")}):* ${direccion}\n`;
+    msg += `\n🛵 *Domicilio (${barrioTexto}):* $${zonaValor.toLocaleString("es-CO")}\n`;
+    msg += `💸 *Subtotal productos:* $${subtotalProductos.toLocaleString("es-CO")}\n`;
   }
-  msg += `\n💸 *Total: $${parseInt(total).toLocaleString("es-CO")}*`;
+  msg += `\n💸 *TOTAL: $${parseInt(total).toLocaleString("es-CO")}*`;
 
   ultimoEnvio = ahora;
   const btn = document.querySelector(".btn");
