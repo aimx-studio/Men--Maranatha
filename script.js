@@ -247,6 +247,24 @@ function enviarPedido(e) {
   }
   msg += `\n💸 *TOTAL: $${parseInt(total).toLocaleString("es-CO")}*`;
 
+  // ── GUARDAR EN SHEETS ──
+  const formData = new FormData();
+  formData.append('entry.1654820871', nombre);
+  formData.append('entry.1309392042', telefono);
+  formData.append('entry.538246735', platos.join(" | "));
+  formData.append('entry.884881326', tipoEntrega);
+  formData.append('entry.1934801204', direccion);
+  formData.append('entry.1463267517', tipoPago);
+  formData.append('entry.1898452928', efectivo);
+  formData.append('entry.1481578597', especificaciones);
+  formData.append('entry.1852319897', "$" + parseInt(total).toLocaleString("es-CO"));
+
+  fetch('https://docs.google.com/forms/d/e/1FAIpQLScBiAzvvNf7r93eqDNaTvRur10Iv5LkdcPWEV0JzckU9Xy0WA/formResponse', {
+    method: 'POST',
+    mode: 'no-cors',
+    body: formData
+  });
+
   ultimoEnvio = ahora;
   const btn = document.querySelector(".btn");
   btn.disabled = true;
