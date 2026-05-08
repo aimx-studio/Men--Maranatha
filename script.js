@@ -174,6 +174,24 @@ function enviarPedido(e) {
   const especificaciones = document.getElementById("especificaciones").value.trim();
   const total = document.getElementById("totalPedido").value;
 
+  if (tipoEntrega === "A domicilio") {
+    const zonaVal = document.getElementById("zonaSelect");
+    const barrioVal = document.getElementById("barrioCliente").value.trim();
+    const direccionVal = document.getElementById("direccion").value.trim();
+    if (!zonaVal || zonaVal.selectedIndex === 0) {
+      alert("Por favor selecciona tu zona de domicilio.");
+      return;
+    }
+    if (!barrioVal) {
+      alert("Por favor escribe tu barrio.");
+      return;
+    }
+    if (!direccionVal) {
+      alert("Por favor escribe tu dirección.");
+      return;
+    }
+  }
+
   if (!document.getElementById("confirmPedido").checked) {
     alert("Por favor acepta el tratamiento de datos.");
     return;
@@ -192,8 +210,9 @@ function enviarPedido(e) {
     const sabor = item.querySelector(".sabor");
     if (sabor) nombre_plato += " (" + sabor.value + ")";
 
-    const papaSelect = item.querySelector(".sabor-acomp:nth-of-type(1)");
-    const ensaladaSelect = item.querySelector(".sabor-acomp:nth-of-type(2)");
+    const acompSelects = item.querySelectorAll(".sabor-acomp");
+const papaSelect = acompSelects[0] || null;
+const ensaladaSelect = acompSelects[1] || null;
     let acomp = "";
 if (papaSelect) acomp += "🥔 Papa: " + papaSelect.value;
 if (ensaladaSelect) acomp += " | 🥗 Ensalada: " + ensaladaSelect.value;
@@ -209,7 +228,7 @@ if (ensaladaSelect) acomp += " | 🥗 Ensalada: " + ensaladaSelect.value;
       const saboresMarcados = [...item.querySelectorAll('input[name="sabores-pizza[]"]:checked')]
         .map(s => s.value);
       if (saboresMarcados.length > 0) {
-        acomp += (acomp ? "\n  " : "") + "🍕 Sabores: " + saboresMarcados.join(", ");
+        nombre_plato += " [Sabores: " + saboresMarcados.join(", ") + "]";
       }
     }
 
