@@ -553,11 +553,11 @@
   <h2 onclick="toggleMenu(this)">🥩 Carne de Res — A la Carta</h2>
   <div class="platos">
     <div class="precio-info">
-      <p class="precio-info-title" style="color:rgba(242,237,228,0.55);font-size:10px;">Todos incluyen: Papa a la Francesa o Criolla · Arepa de Queso · Ensalada Tropical</p>
+      <p class="precio-info-title" style="color:rgba(242,237,228,0.55);font-size:10px;">Todos incluyen: Arepa de Queso · y tu elección de acompañamientos</p>
     </div>
-    <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="CarneParrilla" value="Carne a la Parrilla" onchange="toggleCantidad(this);toggleDescripcion(this)"><label>A la Parrilla</label><span>$35.000</span><input type="number" class="cantidad" name="CarneParrillaCantidad" value="0" min="0" disabled onchange="calcularTotal()"></div><div class="descripcion">Filete 300gr · Chimichurri.</div></div>
-    <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="CarneGratinada" value="Carne Gratinada" onchange="toggleCantidad(this);toggleDescripcion(this)"><label>Gratinada</label><span>$35.000</span><input type="number" class="cantidad" name="CarneGratinadaCantidad" value="0" min="0" disabled onchange="calcularTotal()"></div><div class="descripcion">Filete 300gr · Queso Mozarella.</div></div>
-    <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="CarneRanchera" value="Carne Ranchera" onchange="toggleCantidad(this);toggleDescripcion(this)"><label>Ranchera</label><span>$42.000</span><input type="number" class="cantidad" name="CarneRancheraCantidad" value="0" min="0" disabled onchange="calcularTotal()"></div><div class="descripcion">Filete 300gr · Queso Mozarella · Chorizo · Tocineta.</div></div>
+    <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="CarneParrilla" value="Carne a la Parrilla" onchange="toggleCantidad(this);toggleDescripcion(this)"><label>A la Parrilla</label><span>$35.000</span><input type="number" class="cantidad" name="CarneParrillaCantidad" value="0" min="0" disabled onchange="calcularTotal()"></div><div class="descripcion">Filete 300gr · Chimichurri.<div class="acomp-wrap">🥔 Papa: <select class="sabor-acomp"><option>Francesa</option><option>Criolla</option></select> &nbsp;🥗 Ensalada: <select class="sabor-acomp"><option>De la Casa</option><option>Tropical</option></select></div></div></div>
+    <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="CarneGratinada" value="Carne Gratinada" onchange="toggleCantidad(this);toggleDescripcion(this)"><label>Gratinada</label><span>$35.000</span><input type="number" class="cantidad" name="CarneGratinadaCantidad" value="0" min="0" disabled onchange="calcularTotal()"></div><div class="descripcion">Filete 300gr · Queso Mozarella.<div class="acomp-wrap">🥔 Papa: <select class="sabor-acomp"><option>Francesa</option><option>Criolla</option></select> &nbsp;🥗 Ensalada: <select class="sabor-acomp"><option>De la Casa</option><option>Tropical</option></select></div></div></div>
+    <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="CarneRanchera" value="Carne Ranchera" onchange="toggleCantidad(this);toggleDescripcion(this)"><label>Ranchera</label><span>$42.000</span><input type="number" class="cantidad" name="CarneRancheraCantidad" value="0" min="0" disabled onchange="calcularTotal()"></div><div class="descripcion">Filete 300gr · Queso Mozarella · Chorizo · Tocineta.<div class="acomp-wrap">🥔 Papa: <select class="sabor-acomp"><option>Francesa</option><option>Criolla</option></select> &nbsp;🥗 Ensalada: <select class="sabor-acomp"><option>De la Casa</option><option>Tropical</option></select></div></div></div>
   </div>
 </section>
 
@@ -566,11 +566,11 @@
   <h2 onclick="toggleMenu(this)">🐷 Lomo de Cerdo</h2>
   <div class="platos">
     <div class="precio-info">
-      <p class="precio-info-title" style="color:rgba(242,237,228,0.55);font-size:10px;">Todos Filete 300gr · incluyen Papa + Arepa + Ensalada Tropical</p>
+      <p class="precio-info-title" style="color:rgba(242,237,228,0.55);font-size:10px;">Todos incluyen: Arepa de Queso · y tu elección de acompañamientos</p>
     </div>
-    <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="LomoPlancha" value="Lomo de Cerdo a la Plancha" onchange="toggleCantidad(this);toggleDescripcion(this)"><label>A la Plancha</label><span>$33.000</span><input type="number" class="cantidad" name="LomoPlanchaCantidad" value="0" min="0" disabled onchange="calcularTotal()"></div><div class="descripcion">Filete de Cerdo 300gr a la plancha.</div></div>
-    <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="LomoNapolitano" value="Lomo de Cerdo Napolitano" onchange="toggleCantidad(this);toggleDescripcion(this)"><label>Napolitano</label><span>$37.000</span><input type="number" class="cantidad" name="LomoNapolitanoCantidad" value="0" min="0" disabled onchange="calcularTotal()"></div><div class="descripcion">Filete de Cerdo 300gr · Gratinado con Tomate Fresco · Orégano.</div></div>
-    <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="LomoMexicano" value="Lomo de Cerdo Mexicano" onchange="toggleCantidad(this);toggleDescripcion(this)"><label>Mexicano</label><span>$37.000</span><input type="number" class="cantidad" name="LomoMexicanoCantidad" value="0" min="0" disabled onchange="calcularTotal()"></div><div class="descripcion">Filete de Cerdo 300gr · Salteado con Vegetales · Jalapeños · Chedar · Tacos.</div></div>
+    <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="LomoPlancha" value="Lomo de Cerdo a la Plancha" onchange="toggleCantidad(this);toggleDescripcion(this)"><label>A la Plancha</label><span>$33.000</span><input type="number" class="cantidad" name="LomoPlanchaCantidad" value="0" min="0" disabled onchange="calcularTotal()"></div><div class="descripcion">Filete de Cerdo 300gr a la plancha.<div class="acomp-wrap">🥔 Papa: <select class="sabor-acomp"><option>Francesa</option><option>Criolla</option></select> &nbsp;🥗 Ensalada: <select class="sabor-acomp"><option>De la Casa</option><option>Tropical</option></select></div></div></div>
+    <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="LomoNapolitano" value="Lomo de Cerdo Napolitano" onchange="toggleCantidad(this);toggleDescripcion(this)"><label>Napolitano</label><span>$37.000</span><input type="number" class="cantidad" name="LomoNapolitanoCantidad" value="0" min="0" disabled onchange="calcularTotal()"></div><div class="descripcion">Filete de Cerdo 300gr · Gratinado con Tomate Fresco · Orégano.<div class="acomp-wrap">🥔 Papa: <select class="sabor-acomp"><option>Francesa</option><option>Criolla</option></select> &nbsp;🥗 Ensalada: <select class="sabor-acomp"><option>De la Casa</option><option>Tropical</option></select></div></div></div>
+    <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="LomoMexicano" value="Lomo de Cerdo Mexicano" onchange="toggleCantidad(this);toggleDescripcion(this)"><label>Mexicano</label><span>$37.000</span><input type="number" class="cantidad" name="LomoMexicanoCantidad" value="0" min="0" disabled onchange="calcularTotal()"></div><div class="descripcion">Filete de Cerdo 300gr · Salteado con Vegetales · Jalapeños · Chedar · Tacos.<div class="acomp-wrap">🥔 Papa: <select class="sabor-acomp"><option>Francesa</option><option>Criolla</option></select> &nbsp;🥗 Ensalada: <select class="sabor-acomp"><option>De la Casa</option><option>Tropical</option></select></div></div></div>
   </div>
 </section>
 
@@ -579,12 +579,12 @@
   <h2 onclick="toggleMenu(this)">🍗 Pechuga</h2>
   <div class="platos">
     <div class="precio-info">
-      <p class="precio-info-title" style="color:rgba(242,237,228,0.55);font-size:10px;">Todos Filete 280gr · incluyen Papa + Arepa + Ensalada Tropical</p>
+      <p class="precio-info-title" style="color:rgba(242,237,228,0.55);font-size:10px;">Todos incluyen: Arepa de Queso · y tu elección de acompañamientos</p>
     </div>
-    <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="PechugaPlancha" value="Pechuga a la Plancha" onchange="toggleCantidad(this);toggleDescripcion(this)"><label>A la Plancha</label><span>$33.000</span><input type="number" class="cantidad" name="PechugaPlanchaCantidad" value="0" min="0" disabled onchange="calcularTotal()"></div><div class="descripcion">Filete de Pechuga 280gr a la plancha.</div></div>
-    <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="PechugaNapolitana" value="Pechuga Napolitana" onchange="toggleCantidad(this);toggleDescripcion(this)"><label>Napolitana</label><span>$35.000</span><input type="number" class="cantidad" name="PechugaNapolitanaCantidad" value="0" min="0" disabled onchange="calcularTotal()"></div><div class="descripcion">Filete de Pechuga 280gr · Gratinada con Tomate Fresco · Orégano.</div></div>
-    <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="PechugaRanchera" value="Pechuga Ranchera" onchange="toggleCantidad(this);toggleDescripcion(this)"><label>Ranchera</label><span>$39.000</span><input type="number" class="cantidad" name="PechugaRancheraCantidad" value="0" min="0" disabled onchange="calcularTotal()"></div><div class="descripcion">Filete de Pechuga 280gr · Gratinada · Chorizo · Tocineta.</div></div>
-    <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="PechugaChampinon" value="Pechuga en Champiñón" onchange="toggleCantidad(this);toggleDescripcion(this)"><label>En Champiñón</label><span>$37.000</span><input type="number" class="cantidad" name="PechugaChampínonCantidad" value="0" min="0" disabled onchange="calcularTotal()"></div><div class="descripcion">Filete de Pechuga 280gr · Gratinada con Salsa de Champiñón.</div></div>
+    <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="PechugaPlancha" value="Pechuga a la Plancha" onchange="toggleCantidad(this);toggleDescripcion(this)"><label>A la Plancha</label><span>$33.000</span><input type="number" class="cantidad" name="PechugaPlanchaCantidad" value="0" min="0" disabled onchange="calcularTotal()"></div><div class="descripcion">Filete de Pechuga 280gr a la plancha.<div class="acomp-wrap">🥔 Papa: <select class="sabor-acomp"><option>Francesa</option><option>Criolla</option></select> &nbsp;🥗 Ensalada: <select class="sabor-acomp"><option>De la Casa</option><option>Tropical</option></select></div></div></div>
+    <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="PechugaNapolitana" value="Pechuga Napolitana" onchange="toggleCantidad(this);toggleDescripcion(this)"><label>Napolitana</label><span>$35.000</span><input type="number" class="cantidad" name="PechugaNapolitanaCantidad" value="0" min="0" disabled onchange="calcularTotal()"></div><div class="descripcion">Filete de Pechuga 280gr · Gratinada con Tomate Fresco · Orégano.<div class="acomp-wrap">🥔 Papa: <select class="sabor-acomp"><option>Francesa</option><option>Criolla</option></select> &nbsp;🥗 Ensalada: <select class="sabor-acomp"><option>De la Casa</option><option>Tropical</option></select></div></div></div>
+    <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="PechugaRanchera" value="Pechuga Ranchera" onchange="toggleCantidad(this);toggleDescripcion(this)"><label>Ranchera</label><span>$39.000</span><input type="number" class="cantidad" name="PechugaRancheraCantidad" value="0" min="0" disabled onchange="calcularTotal()"></div><div class="descripcion">Filete de Pechuga 280gr · Gratinada · Chorizo · Tocineta.<div class="acomp-wrap">🥔 Papa: <select class="sabor-acomp"><option>Francesa</option><option>Criolla</option></select> &nbsp;🥗 Ensalada: <select class="sabor-acomp"><option>De la Casa</option><option>Tropical</option></select></div></div></div>
+    <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="PechugaChampinon" value="Pechuga en Champiñón" onchange="toggleCantidad(this);toggleDescripcion(this)"><label>En Champiñón</label><span>$37.000</span><input type="number" class="cantidad" name="PechugaChampínonCantidad" value="0" min="0" disabled onchange="calcularTotal()"></div><div class="descripcion">Filete de Pechuga 280gr · Gratinada con Salsa de Champiñón.<div class="acomp-wrap">🥔 Papa: <select class="sabor-acomp"><option>Francesa</option><option>Criolla</option></select> &nbsp;🥗 Ensalada: <select class="sabor-acomp"><option>De la Casa</option><option>Tropical</option></select></div></div></div>
   </div>
 </section>
 
@@ -593,13 +593,13 @@
   <h2 onclick="toggleMenu(this)">🔥 Otras Carnes</h2>
   <div class="platos">
     <div class="precio-info">
-      <p class="precio-info-title" style="color:rgba(242,237,228,0.55);font-size:10px;">Todos incluyen Papa + Arepa + Ensalada Tropical</p>
+      <p class="precio-info-title" style="color:rgba(242,237,228,0.55);font-size:10px;">Todos incluyen: Arepa de Queso · y tu elección de acompañamientos</p>
     </div>
-    <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="Churrasco" value="Churrasco" onchange="toggleCantidad(this);toggleDescripcion(this)"><label>Churrasco</label><span>$42.000</span><input type="number" class="cantidad" name="ChurrascoCantidad" value="0" min="0" disabled onchange="calcularTotal()"></div><div class="descripcion">Filete de Chatas 300gr.</div></div>
-    <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="PuntaAnca" value="Punta de Anca" onchange="toggleCantidad(this);toggleDescripcion(this)"><label>Punta de Anca</label><span>$42.000</span><input type="number" class="cantidad" name="PuntaAncaCantidad" value="0" min="0" disabled onchange="calcularTotal()"></div><div class="descripcion">Filete 300gr.</div></div>
-    <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="Parrillada" value="Parrillada" onchange="toggleCantidad(this);toggleDescripcion(this)"><label>Parrillada</label><span>$50.000</span><input type="number" class="cantidad" name="ParrilladaCantidad" value="0" min="0" disabled onchange="calcularTotal()"></div><div class="descripcion">130gr Res · 130gr Pechuga · 130gr Lomo Cerdo · 1 Chorizo Parrillero · 1 Morcilla.</div></div>
-    <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="CostillasBBQ" value="Costillas BBQ" onchange="toggleCantidad(this);toggleDescripcion(this)"><label>Costillas BBQ</label><span>$35.000</span><input type="number" class="cantidad" name="CostillasBBQCantidad" value="0" min="0" disabled onchange="calcularTotal()"></div><div class="descripcion">Costilla de Cerdo 350gr.</div></div>
-    <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="Chicharron" value="Chicharrón" onchange="toggleCantidad(this);toggleDescripcion(this)"><label>Chicharrón</label><span>$30.000</span><input type="number" class="cantidad" name="ChicharronCantidad" value="0" min="0" disabled onchange="calcularTotal()"></div><div class="descripcion">Chicharrón de cerdo.</div></div>
+    <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="Churrasco" value="Churrasco" onchange="toggleCantidad(this);toggleDescripcion(this)"><label>Churrasco</label><span>$42.000</span><input type="number" class="cantidad" name="ChurrascoCantidad" value="0" min="0" disabled onchange="calcularTotal()"></div><div class="descripcion">Filete de Chatas 300gr.<div class="acomp-wrap">🥔 Papa: <select class="sabor-acomp"><option>Francesa</option><option>Criolla</option></select> &nbsp;🥗 Ensalada: <select class="sabor-acomp"><option>De la Casa</option><option>Tropical</option></select></div></div></div>
+    <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="PuntaAnca" value="Punta de Anca" onchange="toggleCantidad(this);toggleDescripcion(this)"><label>Punta de Anca</label><span>$42.000</span><input type="number" class="cantidad" name="PuntaAncaCantidad" value="0" min="0" disabled onchange="calcularTotal()"></div><div class="descripcion">Filete 300gr.<div class="acomp-wrap">🥔 Papa: <select class="sabor-acomp"><option>Francesa</option><option>Criolla</option></select> &nbsp;🥗 Ensalada: <select class="sabor-acomp"><option>De la Casa</option><option>Tropical</option></select></div></div></div>
+    <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="Parrillada" value="Parrillada" onchange="toggleCantidad(this);toggleDescripcion(this)"><label>Parrillada</label><span>$50.000</span><input type="number" class="cantidad" name="ParrilladaCantidad" value="0" min="0" disabled onchange="calcularTotal()"></div><div class="descripcion">130gr Res · 130gr Pechuga · 130gr Lomo Cerdo · 1 Chorizo Parrillero · 1 Morcilla.<div class="acomp-wrap">🥔 Papa: <select class="sabor-acomp"><option>Francesa</option><option>Criolla</option></select> &nbsp;🥗 Ensalada: <select class="sabor-acomp"><option>De la Casa</option><option>Tropical</option></select></div></div></div>
+    <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="CostillasBBQ" value="Costillas BBQ" onchange="toggleCantidad(this);toggleDescripcion(this)"><label>Costillas BBQ</label><span>$35.000</span><input type="number" class="cantidad" name="CostillasBBQCantidad" value="0" min="0" disabled onchange="calcularTotal()"></div><div class="descripcion">Costilla de Cerdo 350gr.<div class="acomp-wrap">🥔 Papa: <select class="sabor-acomp"><option>Francesa</option><option>Criolla</option></select> &nbsp;🥗 Ensalada: <select class="sabor-acomp"><option>De la Casa</option><option>Tropical</option></select></div></div></div>
+    <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="Chicharron" value="Chicharrón" onchange="toggleCantidad(this);toggleDescripcion(this)"><label>Chicharrón</label><span>$30.000</span><input type="number" class="cantidad" name="ChicharronCantidad" value="0" min="0" disabled onchange="calcularTotal()"></div><div class="descripcion">Chicharrón de cerdo.<div class="acomp-wrap">🥔 Papa: <select class="sabor-acomp"><option>Francesa</option><option>Criolla</option></select></div></div></div>
   </div>
 </section>
 
@@ -625,7 +625,7 @@
   <h2 onclick="toggleMenu(this)">🐟 Pescados</h2>
   <div class="platos">
     <div class="precio-info">
-      <p class="precio-info-title" style="color:rgba(242,237,228,0.55);font-size:10px;">Incluyen Papa a la Francesa o Criolla o Patacón · Ensalada de la Casa o Tropical</p>
+      <p class="precio-info-title" style="color:rgba(242,237,228,0.55);font-size:10px;">Incluyen tu elección de acompañamientos</p>
     </div>
     <div class="item">
       <div class="item-linea">
@@ -635,7 +635,7 @@
         <span>$40.000</span>
         <input type="number" class="cantidad" name="TruchaPrepCantidad" value="0" min="0" disabled onchange="calcularTotal()">
       </div>
-      <div class="descripcion">Trucha 300gr en la preparación seleccionada.</div>
+      <div class="descripcion">Trucha 300gr en la preparación seleccionada.<div class="acomp-wrap">🥔 Papa: <select class="sabor-acomp"><option>Francesa</option><option>Criolla</option><option>Patacón</option></select> &nbsp;🥗 Ensalada: <select class="sabor-acomp"><option>De la Casa</option><option>Tropical</option></select></div></div>
     </div>
     <div class="item">
       <div class="item-linea">
@@ -644,7 +644,7 @@
         <span>$46.000</span>
         <input type="number" class="cantidad" name="TruchaMarineraCantidad" value="0" min="0" disabled onchange="calcularTotal()">
       </div>
-      <div class="descripcion">Trucha 300gr bañada en Salsa Marinera.</div>
+      <div class="descripcion">Trucha 300gr bañada en Salsa Marinera.<div class="acomp-wrap">🥔 Papa: <select class="sabor-acomp"><option>Francesa</option><option>Criolla</option><option>Patacón</option></select> &nbsp;🥗 Ensalada: <select class="sabor-acomp"><option>De la Casa</option><option>Tropical</option></select></div></div>
     </div>
     <div class="item">
       <div class="item-linea">
@@ -654,7 +654,7 @@
         <span>$52.000</span>
         <input type="number" class="cantidad" name="SalmonPrepCantidad" value="0" min="0" disabled onchange="calcularTotal()">
       </div>
-      <div class="descripcion">Filete de Salmón 250gr en la preparación seleccionada.</div>
+      <div class="descripcion">Filete de Salmón 250gr en la preparación seleccionada.<div class="acomp-wrap">🥔 Papa: <select class="sabor-acomp"><option>Francesa</option><option>Criolla</option><option>Patacón</option></select> &nbsp;🥗 Ensalada: <select class="sabor-acomp"><option>De la Casa</option><option>Tropical</option></select></div></div>
     </div>
     <div class="item">
       <div class="item-linea">
@@ -663,7 +663,7 @@
         <span>$60.000</span>
         <input type="number" class="cantidad" name="SalmonMarineroCantidad" value="0" min="0" disabled onchange="calcularTotal()">
       </div>
-      <div class="descripcion">Filete de Salmón 250gr bañado en Salsa Marinera.</div>
+      <div class="descripcion">Filete de Salmón 250gr bañado en Salsa Marinera.<div class="acomp-wrap">🥔 Papa: <select class="sabor-acomp"><option>Francesa</option><option>Criolla</option><option>Patacón</option></select> &nbsp;🥗 Ensalada: <select class="sabor-acomp"><option>De la Casa</option><option>Tropical</option></select></div></div>
     </div>
   </div>
 </section>
@@ -737,21 +737,24 @@
 
     <div id="direccionField" style="display:none;">
       <div class="form-group">
-        <label for="zonaSelect">🗺️ Barrio / Zona</label>
-        <select id="zonaSelect" name="zonaSelect" onchange="calcularTotal(); actualizarPlaceholderDireccion()">
-          <option value="0">— Selecciona tu barrio —</option>
+        <label>🗺️ Zona y Barrio</label>
+        <div style="display:flex; gap:8px; margin-bottom:8px;">
+<select id="zonaSelect" name="zonaSelect" onchange="calcularTotal(); actualizarPlaceholderDireccion()" style="flex:1;">
+          <option value="0">— Selecciona tu zona —</option>
           <option value="3000">Funza — $3.000</option>
           <option value="4000">Mosquera — $4.000</option>
           <option value="6000">Diamante / Lucero / Sol — $6.000</option>
           <option value="8000">Bodegas — $8.000</option>
         </select>
+        <input type="text" id="barrioCliente" name="barrioCliente" placeholder="Tu barrio" style="flex:1;">
+</div>
       </div>
       <div id="tarjetaDomicilio" style="display:none; background:rgba(245,166,35,0.07); border:1px solid rgba(245,166,35,0.25); border-radius:6px; padding:9px 13px; margin-bottom:10px; font-size:12px; color:rgba(242,237,228,0.75);">
-        🛵 El costo del domicilio para este barrio se sumará automáticamente al total.
+        🛵 El costo del domicilio para esta zona se sumará automáticamente al total.
       </div>
       <div class="form-group">
         <label for="direccion">📍 Dirección</label>
-        <input type="text" id="direccion" name="direccion" placeholder="Escribe tu dirección (el barrio se agrega solo)">
+        <input type="text" id="direccion" name="direccion" placeholder="Ej: Calle 10 #6-25">
       </div>
     </div>
 

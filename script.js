@@ -192,6 +192,12 @@ function enviarPedido(e) {
     const sabor = item.querySelector(".sabor");
     if (sabor) nombre_plato += " (" + sabor.value + ")";
 
+    const papaSelect = item.querySelector(".sabor-acomp:nth-of-type(1)");
+    const ensaladaSelect = item.querySelector(".sabor-acomp:nth-of-type(2)");
+    let acomp = "";
+if (papaSelect) acomp += "🥔 Papa: " + papaSelect.value;
+if (ensaladaSelect) acomp += " | 🥗 Ensalada: " + ensaladaSelect.value;
+
     const tamano = item.querySelector(".tamano");
     if (tamano) {
       const opt = tamano.options[tamano.selectedIndex];
@@ -203,13 +209,15 @@ function enviarPedido(e) {
       const saboresMarcados = [...item.querySelectorAll('input[name="sabores-pizza[]"]:checked')]
         .map(s => s.value);
       if (saboresMarcados.length > 0) {
-        nombre_plato += " [Sabores: " + saboresMarcados.join(", ") + "]";
+        acomp += (acomp ? "\n  " : "") + "🍕 Sabores: " + saboresMarcados.join(", ");
       }
     }
 
     const span = item.querySelector(".item-linea span");
     const precio = span ? span.textContent : "";
-    platos.push(`• ${nombre_plato} x${cantidad} ${precio}`);
+    let linea = `• ${cantidad} × ${nombre_plato} ${precio}`;
+    if (acomp) linea += `\n  ${acomp}`;
+    platos.push(linea);
   });
 
   if (platos.length === 0) {
@@ -218,11 +226,12 @@ function enviarPedido(e) {
   }
 
   const direccionRaw = document.getElementById("direccion").value.trim();
+  const barrio = document.getElementById("barrioCliente")?.value.trim() || "";
   const zonaSelect = document.getElementById("zonaSelect");
   const barrioTexto = zonaSelect && zonaSelect.selectedIndex > 0
     ? zonaSelect.options[zonaSelect.selectedIndex].text.split(" — ")[0]
     : "";
-  const direccion = barrioTexto ? `(${barrioTexto}) ${direccionRaw}` : direccionRaw;
+  const direccion = barrioTexto ? `(${barrioTexto}${barrio ? " — " + barrio : ""}) ${direccionRaw}` : direccionRaw;
   const zonaValor = zonaSelect ? Number(zonaSelect.value) || 0 : 0;
   const zonaTexto = zonaSelect && zonaSelect.selectedIndex > 0 ? zonaSelect.options[zonaSelect.selectedIndex].text : "";
   const mesa = document.getElementById("numeroMesa").value.trim();
@@ -232,7 +241,7 @@ function enviarPedido(e) {
   let msg = `📦 *Nuevo pedido recibido*\n\n`;
   msg += `👤 *Nombre:* ${nombre}\n`;
   msg += `📞 *Número:* ${telefono}\n\n`;
-  msg += `🍽️ *Platos:*\n${platos.join("\n")}\n`;
+  msg += `🍽️ *Platos:*\n\n${platos.join("\n\n")}\n`;
   if (especificaciones) msg += `\n📝 *Extra:*\n${especificaciones}\n`;
   msg += `\n📦 *Método:* ${tipoEntrega}\n`;
   if (tipoEntrega === "A domicilio") {

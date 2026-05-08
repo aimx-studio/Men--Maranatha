@@ -499,3 +499,31 @@ footer strong { color: rgba(245,166,35,0.55); }
 .item-linea label {
   pointer-events: auto;
 }
+
+/* ===== ACOMPAÑAMIENTOS ===== */
+.acomp-wrap {
+  margin-top: 7px;
+  font-size: 12px;
+  font-style: normal;
+  color: rgba(242, 237, 228, 0.65);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.sabor-acomp {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(245, 166, 35, 0.22);
+  border-radius: 4px;
+  color: var(--blanco);
+  font-family: var(--font-body);
+  font-size: 11px;
+  padding: 3px 5px;
+  outline: none;
+  cursor: pointer;
+}
+
+.sabor-acomp option {
+  background: #1a1a1a;
+}
