@@ -1,6 +1,7 @@
 // ===== PRECIOS FIJOS =====
 const PRECIOS = {
   PizzaPorcion:9500,
+PizzaPersonal:18000, PizzaSmall:53000, PizzaMedium:63000, PizzaExtraGrande:90000,
   PanNapolitano:6000, PataconHogao:6000,
   MazorcadaGrande:35000, MazorcadaMini:25000, MazorcadaMaranatha4:80000,
   PanzHawaiano:20000, PanzCarnes:20000, PanzRanchero:20000, PanzMaranatha:20000,
@@ -57,9 +58,14 @@ function toggleDescripcion(checkbox) {
 
  function limitarSaboresPizza(saborCb) {
   const item = saborCb.closest(".item");
-  const tamano = item.querySelector(".tamano");
-  const limites = { "18000": 2, "53000": 2, "63000": 3, "90000": 4 };
-  const limite = limites[tamano?.value] || 2;
+  const cb = item.querySelector(".check-plato");
+  const limites = {
+    "PizzaPersonal": 2,
+    "PizzaSmall": 2,
+    "PizzaMedium": 3,
+    "PizzaExtraGrande": 4
+  };
+  const limite = limites[cb?.name] || 2;
   const marcados = [...item.querySelectorAll('input[name="sabores-pizza[]"]:checked')];
   if (marcados.length > limite) {
     saborCb.checked = false;
@@ -68,9 +74,9 @@ function toggleDescripcion(checkbox) {
 }
 
 function actualizarContadorSabores(item) {
-  const limites = { "18000": 2, "53000": 2, "63000": 3, "90000": 4 };
-  const tamano = item.querySelector(".tamano");
-  const limite = limites[tamano?.value] || 2;
+  const cb = item.querySelector(".check-plato");
+  const limites = { "PizzaPersonal": 2, "PizzaSmall": 2, "PizzaMedium": 3, "PizzaExtraGrande": 4 };
+  const limite = limites[cb?.name] || 2;
   const marcados = [...item.querySelectorAll('input[name="sabores-pizza[]"]:checked')].length;
 
   let contador = item.querySelector(".contador-sabores");
@@ -131,8 +137,10 @@ function calcularTotal() {
 
   document.getElementById("total").innerText = "$" + total.toLocaleString("es-CO");
   document.getElementById("totalPedido").value = total;
-  const pizzaItem = document.querySelector('[name="Pizza"]')?.closest(".item");
-  if (pizzaItem) actualizarContadorSabores(pizzaItem);
+  ["PizzaPersonal","PizzaSmall","PizzaMedium","PizzaExtraGrande"].forEach(n => {
+    const pizzaItem = document.querySelector(`[name="${n}"]`)?.closest(".item");
+    if (pizzaItem) actualizarContadorSabores(pizzaItem);
+  });
 }
 
 // ===== LÓGICA ENTREGA =====
@@ -224,7 +232,7 @@ if (ensaladaSelect) acomp += " | 🥗 Ensalada: " + ensaladaSelect.value;
     }
 
     // Sabores de pizza (checkboxes)
-    if (cb.name === "Pizza") {
+    if (["PizzaPersonal","PizzaSmall","PizzaMedium","PizzaExtraGrande"].includes(cb.name)) {
       const saboresMarcados = [...item.querySelectorAll('input[name="sabores-pizza[]"]:checked')]
         .map(s => s.value);
       if (saboresMarcados.length > 0) {

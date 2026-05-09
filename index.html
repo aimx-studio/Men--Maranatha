@@ -33,16 +33,10 @@
 <section class="menu-section">
   <h2 onclick="toggleMenu(this)">🍕 Porción de Pizza</h2>
   <div class="platos">
-    <div class="item">
-      <div class="item-linea">
-        <input type="checkbox" class="check-plato" name="PizzaPorcion" value="Pizza Porción" onchange="toggleCantidad(this);toggleDescripcion(this)">
-        <label>Pizza Porción</label>
-        <select class="sabor"><option>Hawaiana</option><option>Carnes</option><option>Pollo Champiñón</option><option>Mexicana</option></select>
-        <span>$9.500</span>
-        <input type="number" class="cantidad" name="PizzaPorcionCantidad" value="0" min="0" disabled onchange="calcularTotal()">
-      </div>
-      <div class="descripcion">Porción individual del sabor seleccionado.</div>
-    </div>
+    <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="PizzaPorcionHawaiana" value="Pizza Porción Hawaiana" onchange="toggleCantidad(this)"><label>Porción Hawaiana</label><span>$9.500</span><input type="number" class="cantidad" value="0" min="0" disabled onchange="calcularTotal()"></div></div>
+    <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="PizzaPorcionCarnes" value="Pizza Porción Carnes" onchange="toggleCantidad(this)"><label>Porción Carnes</label><span>$9.500</span><input type="number" class="cantidad" value="0" min="0" disabled onchange="calcularTotal()"></div></div>
+    <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="PizzaPorcionPollo" value="Pizza Porción Pollo Champiñón" onchange="toggleCantidad(this)"><label>Porción Pollo Champiñón</label><span>$9.500</span><input type="number" class="cantidad" value="0" min="0" disabled onchange="calcularTotal()"></div></div>
+    <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="PizzaPorcionMexicana" value="Pizza Porción Mexicana" onchange="toggleCantidad(this)"><label>Porción Mexicana</label><span>$9.500</span><input type="number" class="cantidad" value="0" min="0" disabled onchange="calcularTotal()"></div></div>
   </div>
 </section>
 
@@ -53,27 +47,23 @@
     <div class="precio-info">
       <p class="precio-info-title">Tamaños y Precios</p>
       <table>
-        <tr><td>Personal — 2 sabores</td><td>$18.000</td></tr>
-        <tr><td>Small — 2 sabores, 6 porciones</td><td>$53.000</td></tr>
-        <tr><td>Medium — 3 sabores, 8 porciones</td><td>$63.000</td></tr>
-        <tr><td>Extra Grande — 4 sabores, 10 porciones</td><td>$90.000</td></tr>
+        <tr><td>Personal — 2 sabores, 4 mini porciones</td><td>$18.000</td></tr>
+        <tr><td>Small — 2 sabores, 6 porciones pequeñas</td><td>$53.000</td></tr>
+        <tr><td>Medium — 3 sabores, 8 porciones medianas</td><td>$63.000</td></tr>
+        <tr><td>Extra Grande — 4 sabores, 10 porciones grandes</td><td>$90.000</td></tr>
       </table>
     </div>
+
+    <!-- PERSONAL -->
     <div class="item">
       <div class="item-linea">
-        <input type="checkbox" class="check-plato" name="Pizza" value="Pizza" onchange="toggleCantidad(this);toggleDescripcion(this)">
-        <label>Pizza</label>
-        <select class="tamano" onchange="calcularTotal()">
-          <option value="18000">Personal — $18.000</option>
-          <option value="53000">Small — $53.000</option>
-          <option value="63000">Medium — $63.000</option>
-          <option value="90000">Extra Grande — $90.000</option>
-        </select>
+        <input type="checkbox" class="check-plato" name="PizzaPersonal" value="Pizza Personal" onchange="toggleCantidad(this);toggleDescripcion(this)">
+        <label>Personal — 2 sabores</label>
         <span>$18.000</span>
-        <input type="number" class="cantidad" name="PizzaCantidad" value="0" min="0" disabled onchange="calcularTotal()">
+        <input type="number" class="cantidad" value="0" min="0" disabled onchange="calcularTotal()">
       </div>
       <div class="descripcion">
-        <strong style="color:rgba(245,166,35,0.8);font-size:11px;display:block;margin-bottom:7px;">🍕 Elige tus sabores:</strong>
+        <strong style="color:rgba(245,166,35,0.8);font-size:11px;display:block;margin-bottom:7px;">🍕 Elige hasta 2 sabores:</strong>
         <div class="sabores-pizza-wrap" style="display:flex;flex-wrap:wrap;gap:5px;">
           <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Arequipe"> Arequipe</label>
           <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Chocolate"> Chocolate</label>
@@ -125,6 +115,193 @@
         </div>
       </div>
     </div>
+
+    <!-- SMALL -->
+    <div class="item">
+      <div class="item-linea">
+        <input type="checkbox" class="check-plato" name="PizzaSmall" value="Pizza Small" onchange="toggleCantidad(this);toggleDescripcion(this)">
+        <label>Small — 2 sabores</label>
+        <span>$53.000</span>
+        <input type="number" class="cantidad" value="0" min="0" disabled onchange="calcularTotal()">
+      </div>
+      <div class="descripcion">
+        <strong style="color:rgba(245,166,35,0.8);font-size:11px;display:block;margin-bottom:7px;">🍕 Elige hasta 2 sabores:</strong>
+        <div class="sabores-pizza-wrap" style="display:flex;flex-wrap:wrap;gap:5px;">
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Arequipe"> Arequipe</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Chocolate"> Chocolate</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Nutella"> Nutella</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="M&M"> M&M</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Veleña"> Veleña</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Hawaiana"> Hawaiana</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Durazno"> Durazno</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Tropical"> Tropical</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Aborrajada"> Aborrajada</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Tentación"> Tentación</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Oreo"> Oreo</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Pollo"> Pollo</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Pollo Champiñón"> Pollo Champiñón</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Pollo Durazno"> Pollo Durazno</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Pollo Maíz Tocineta"> Pollo Maíz Tocineta</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Pollo Verduras"> Pollo Verduras</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Pollo Piña"> Pollo Piña</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Pollo BBQ Tocineta"> Pollo BBQ Tocineta</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Pollo Miel Mostaza"> Pollo Miel Mostaza</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Ranchera"> Ranchera</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Mexicana"> Mexicana</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Argentina"> Argentina</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Napolitana"> Napolitana</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Bolognesa"> Bolognesa</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Española"> Española</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Criolla"> Criolla</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Mediterránea"> Mediterránea</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="New York"> New York</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Colombianita"> Colombianita</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Campesina"> Campesina</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Carnes"> Carnes</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="De la Casa"> De la Casa</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Ciruela y Tocineta"> Ciruela y Tocineta</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Pizza Huevo"> Pizza Huevo</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Costillitas BBQ"> Costillitas BBQ</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Maranatha"> Maranatha</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Margarita"> Margarita</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Atún"> Atún</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Vegetariana"> Vegetariana</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Amarilla"> Amarilla</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Bacon"> Bacon</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Cántones"> Cántones</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="TNT"> TNT</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Pollo Chorizo Miel Mostaza"> Pollo Chorizo Miel Mostaza</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Valencia"> Valencia</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Americana"> Americana</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Típica"> Típica</label>
+        </div>
+      </div>
+    </div>
+
+    <!-- MEDIUM -->
+    <div class="item">
+      <div class="item-linea">
+        <input type="checkbox" class="check-plato" name="PizzaMedium" value="Pizza Medium" onchange="toggleCantidad(this);toggleDescripcion(this)">
+        <label>Medium — 3 sabores</label>
+        <span>$63.000</span>
+        <input type="number" class="cantidad" value="0" min="0" disabled onchange="calcularTotal()">
+      </div>
+      <div class="descripcion">
+        <strong style="color:rgba(245,166,35,0.8);font-size:11px;display:block;margin-bottom:7px;">🍕 Elige hasta 3 sabores:</strong>
+        <div class="sabores-pizza-wrap" style="display:flex;flex-wrap:wrap;gap:5px;">
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Arequipe"> Arequipe</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Chocolate"> Chocolate</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Nutella"> Nutella</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="M&M"> M&M</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Veleña"> Veleña</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Hawaiana"> Hawaiana</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Durazno"> Durazno</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Tropical"> Tropical</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Aborrajada"> Aborrajada</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Tentación"> Tentación</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Oreo"> Oreo</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Pollo"> Pollo</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Pollo Champiñón"> Pollo Champiñón</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Pollo Durazno"> Pollo Durazno</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Pollo Maíz Tocineta"> Pollo Maíz Tocineta</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Pollo Verduras"> Pollo Verduras</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Pollo Piña"> Pollo Piña</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Pollo BBQ Tocineta"> Pollo BBQ Tocineta</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Pollo Miel Mostaza"> Pollo Miel Mostaza</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Ranchera"> Ranchera</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Mexicana"> Mexicana</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Argentina"> Argentina</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Napolitana"> Napolitana</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Bolognesa"> Bolognesa</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Española"> Española</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Criolla"> Criolla</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Mediterránea"> Mediterránea</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="New York"> New York</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Colombianita"> Colombianita</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Campesina"> Campesina</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Carnes"> Carnes</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="De la Casa"> De la Casa</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Ciruela y Tocineta"> Ciruela y Tocineta</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Pizza Huevo"> Pizza Huevo</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Costillitas BBQ"> Costillitas BBQ</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Maranatha"> Maranatha</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Margarita"> Margarita</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Atún"> Atún</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Vegetariana"> Vegetariana</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Amarilla"> Amarilla</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Bacon"> Bacon</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Cántones"> Cántones</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="TNT"> TNT</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Pollo Chorizo Miel Mostaza"> Pollo Chorizo Miel Mostaza</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Valencia"> Valencia</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Americana"> Americana</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Típica"> Típica</label>
+        </div>
+      </div>
+    </div>
+
+    <!-- EXTRA GRANDE -->
+    <div class="item">
+      <div class="item-linea">
+        <input type="checkbox" class="check-plato" name="PizzaExtraGrande" value="Pizza Extra Grande" onchange="toggleCantidad(this);toggleDescripcion(this)">
+        <label>Extra Grande — 4 sabores</label>
+        <span>$90.000</span>
+        <input type="number" class="cantidad" value="0" min="0" disabled onchange="calcularTotal()">
+      </div>
+      <div class="descripcion">
+        <strong style="color:rgba(245,166,35,0.8);font-size:11px;display:block;margin-bottom:7px;">🍕 Elige hasta 4 sabores:</strong>
+        <div class="sabores-pizza-wrap" style="display:flex;flex-wrap:wrap;gap:5px;">
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Arequipe"> Arequipe</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Chocolate"> Chocolate</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Nutella"> Nutella</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="M&M"> M&M</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Veleña"> Veleña</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Hawaiana"> Hawaiana</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Durazno"> Durazno</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Tropical"> Tropical</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Aborrajada"> Aborrajada</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Tentación"> Tentación</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Oreo"> Oreo</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Pollo"> Pollo</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Pollo Champiñón"> Pollo Champiñón</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Pollo Durazno"> Pollo Durazno</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Pollo Maíz Tocineta"> Pollo Maíz Tocineta</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Pollo Verduras"> Pollo Verduras</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Pollo Piña"> Pollo Piña</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Pollo BBQ Tocineta"> Pollo BBQ Tocineta</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Pollo Miel Mostaza"> Pollo Miel Mostaza</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Ranchera"> Ranchera</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Mexicana"> Mexicana</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Argentina"> Argentina</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Napolitana"> Napolitana</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Bolognesa"> Bolognesa</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Española"> Española</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Criolla"> Criolla</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Mediterránea"> Mediterránea</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="New York"> New York</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Colombianita"> Colombianita</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Campesina"> Campesina</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Carnes"> Carnes</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="De la Casa"> De la Casa</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Ciruela y Tocineta"> Ciruela y Tocineta</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Pizza Huevo"> Pizza Huevo</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Costillitas BBQ"> Costillitas BBQ</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Maranatha"> Maranatha</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Margarita"> Margarita</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Atún"> Atún</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Vegetariana"> Vegetariana</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Amarilla"> Amarilla</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Bacon"> Bacon</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Cántones"> Cántones</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="TNT"> TNT</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Pollo Chorizo Miel Mostaza"> Pollo Chorizo Miel Mostaza</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Valencia"> Valencia</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Americana"> Americana</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Típica"> Típica</label>
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
 
