@@ -57,55 +57,38 @@ function toggleDescripcion(checkbox) {
 }
 
  function limitarSaboresPizza(saborCb) {
+  const panel = saborCb.closest(".pizza-tab-panel");
   const item = saborCb.closest(".item");
-  const cb = item.querySelector(".check-plato");
-  const limites = {
-    "PizzaPersonal": 2,
-    "PizzaSmall": 2,
-    "PizzaMedium": 3,
-    "PizzaExtraGrande": 4
-  };
-  const limite = limites[cb?.name] || 2;
-  const marcados = [...item.querySelectorAll('input[name="sabores-pizza[]"]:checked')];
-  if (marcados.length > limite) {
-    saborCb.checked = false;
-  }
-  actualizarContadorSabores(item);
-}
-
-function actualizarContadorSabores(item) {
   const cb = item.querySelector(".check-plato");
   const limites = { "PizzaPersonal": 2, "PizzaSmall": 2, "PizzaMedium": 3, "PizzaExtraGrande": 4 };
   const limite = limites[cb?.name] || 2;
-  const marcados = [...item.querySelectorAll('input[name="sabores-pizza[]"]:checked')].length;
-
-  let contador = item.querySelector(".contador-sabores");
+  const marcados = [...panel.querySelectorAll('input[type="checkbox"]:checked')];
+  if (marcados.length > limite) saborCb.checked = false;
+  actualizarContadorSabores(panel, limite);
+}
+function actualizarContadorSabores(panel, limite) {
+  const marcados = [...panel.querySelectorAll('input[type="checkbox"]:checked')].length;
+  let contador = panel.querySelector(".contador-sabores");
   if (!contador) {
     contador = document.createElement("p");
     contador.className = "contador-sabores";
     contador.style.cssText = "font-size:12px;margin:0 0 8px 0;padding:5px 10px;border-radius:5px;font-weight:600;";
-    item.querySelector(".sabores-pizza-wrap").before(contador);
+    panel.querySelector(".sabores-pizza-wrap").before(contador);
   }
-
   if (marcados >= limite) {
     contador.style.background = "rgba(245,166,35,0.15)";
     contador.style.color = "#f5a623";
-    contador.textContent = `✅ ${marcados}/${limite} sabores seleccionados — máximo alcanzado`;
+    contador.textContent = `✅ ${marcados}/${limite} sabores — máximo alcanzado`;
   } else {
     contador.style.background = "rgba(255,255,255,0.05)";
     contador.style.color = "rgba(242,237,228,0.7)";
     contador.textContent = `🍕 ${marcados}/${limite} sabores — elige ${limite - marcados} más`;
   }
-
-  item.querySelectorAll('input[name="sabores-pizza[]"]').forEach(cb => {
-    const pill = cb.closest(".sabor-pill");
-    if (!cb.checked && marcados >= limite) {
-      pill.style.opacity = "0.35";
-      pill.style.pointerEvents = "none";
-    } else {
-      pill.style.opacity = "1";
-      pill.style.pointerEvents = "auto";
-    }
+  panel.querySelectorAll('input[type="checkbox"]').forEach(s => {
+    const pill = s.closest(".sabor-pill");
+    if (!pill) return;
+    pill.style.opacity = (!s.checked && marcados >= limite) ? "0.35" : "1";
+    pill.style.pointerEvents = (!s.checked && marcados >= limite) ? "none" : "auto";
   });
 }
 
@@ -137,10 +120,6 @@ function calcularTotal() {
 
   document.getElementById("total").innerText = "$" + total.toLocaleString("es-CO");
   document.getElementById("totalPedido").value = total;
-  ["PizzaPersonal","PizzaSmall","PizzaMedium","PizzaExtraGrande"].forEach(n => {
-    const pizzaItem = document.querySelector(`[name="${n}"]`)?.closest(".item");
-    if (pizzaItem) actualizarContadorSabores(pizzaItem);
-  });
 }
 
 // ===== LÓGICA ENTREGA =====
@@ -233,10 +212,15 @@ if (ensaladaSelect) acomp += " | 🥗 Ensalada: " + ensaladaSelect.value;
 
     // Sabores de pizza (checkboxes)
     if (["PizzaPersonal","PizzaSmall","PizzaMedium","PizzaExtraGrande"].includes(cb.name)) {
-      const saboresMarcados = [...item.querySelectorAll('input[name="sabores-pizza[]"]:checked')]
-        .map(s => s.value);
-      if (saboresMarcados.length > 0) {
-        nombre_plato += " [Sabores: " + saboresMarcados.join(", ") + "]";
+      const panels = item.querySelectorAll(".pizza-tab-panel");
+      if (panels.length <= 1) {
+        const saboresMarcados = [...(panels[0] || item).querySelectorAll('input[type="checkbox"]:checked')].map(s => s.value);
+        if (saboresMarcados.length > 0) nombre_plato += " [Sabores: " + saboresMarcados.join(", ") + "]";
+      } else {
+        panels.forEach((panel, i) => {
+          const saboresMarcados = [...panel.querySelectorAll('input[type="checkbox"]:checked')].map(s => s.value);
+          nombre_plato += `\n  🍕 Pizza ${i+1}: ${saboresMarcados.length > 0 ? saboresMarcados.join(", ") : "Sin sabores elegidos"}`;
+        });
       }
     }
 
@@ -324,6 +308,118 @@ document.querySelectorAll(".item-linea label").forEach(label => {
     }
   });
 });
+
+// ===== TABS DE PIZZA =====
+const SABORES_PIZZA_HTML = `<label class="sabor-pill"><input type="checkbox" onchange="limitarSaboresPizza(this)" value="Arequipe"> Arequipe</label><label class="sabor-pill"><input type="checkbox" onchange="limitarSaboresPizza(this)" value="Chocolate"> Chocolate</label><label class="sabor-pill"><input type="checkbox" onchange="limitarSaboresPizza(this)" value="Nutella"> Nutella</label><label class="sabor-pill"><input type="checkbox" onchange="limitarSaboresPizza(this)" value="M&M"> M&M</label><label class="sabor-pill"><input type="checkbox" onchange="limitarSaboresPizza(this)" value="Veleña"> Veleña</label><label class="sabor-pill"><input type="checkbox" onchange="limitarSaboresPizza(this)" value="Hawaiana"> Hawaiana</label><label class="sabor-pill"><input type="checkbox" onchange="limitarSaboresPizza(this)" value="Durazno"> Durazno</label><label class="sabor-pill"><input type="checkbox" onchange="limitarSaboresPizza(this)" value="Tropical"> Tropical</label><label class="sabor-pill"><input type="checkbox" onchange="limitarSaboresPizza(this)" value="Aborrajada"> Aborrajada</label><label class="sabor-pill"><input type="checkbox" onchange="limitarSaboresPizza(this)" value="Tentación"> Tentación</label><label class="sabor-pill"><input type="checkbox" onchange="limitarSaboresPizza(this)" value="Oreo"> Oreo</label><label class="sabor-pill"><input type="checkbox" onchange="limitarSaboresPizza(this)" value="Pollo"> Pollo</label><label class="sabor-pill"><input type="checkbox" onchange="limitarSaboresPizza(this)" value="Pollo Champiñón"> Pollo Champiñón</label><label class="sabor-pill"><input type="checkbox" onchange="limitarSaboresPizza(this)" value="Pollo Durazno"> Pollo Durazno</label><label class="sabor-pill"><input type="checkbox" onchange="limitarSaboresPizza(this)" value="Pollo Maíz Tocineta"> Pollo Maíz Tocineta</label><label class="sabor-pill"><input type="checkbox" onchange="limitarSaboresPizza(this)" value="Pollo Verduras"> Pollo Verduras</label><label class="sabor-pill"><input type="checkbox" onchange="limitarSaboresPizza(this)" value="Pollo Piña"> Pollo Piña</label><label class="sabor-pill"><input type="checkbox" onchange="limitarSaboresPizza(this)" value="Pollo BBQ Tocineta"> Pollo BBQ Tocineta</label><label class="sabor-pill"><input type="checkbox" onchange="limitarSaboresPizza(this)" value="Pollo Miel Mostaza"> Pollo Miel Mostaza</label><label class="sabor-pill"><input type="checkbox" onchange="limitarSaboresPizza(this)" value="Ranchera"> Ranchera</label><label class="sabor-pill"><input type="checkbox" onchange="limitarSaboresPizza(this)" value="Mexicana"> Mexicana</label><label class="sabor-pill"><input type="checkbox" onchange="limitarSaboresPizza(this)" value="Argentina"> Argentina</label><label class="sabor-pill"><input type="checkbox" onchange="limitarSaboresPizza(this)" value="Napolitana"> Napolitana</label><label class="sabor-pill"><input type="checkbox" onchange="limitarSaboresPizza(this)" value="Bolognesa"> Bolognesa</label><label class="sabor-pill"><input type="checkbox" onchange="limitarSaboresPizza(this)" value="Española"> Española</label><label class="sabor-pill"><input type="checkbox" onchange="limitarSaboresPizza(this)" value="Criolla"> Criolla</label><label class="sabor-pill"><input type="checkbox" onchange="limitarSaboresPizza(this)" value="Mediterránea"> Mediterránea</label><label class="sabor-pill"><input type="checkbox" onchange="limitarSaboresPizza(this)" value="New York"> New York</label><label class="sabor-pill"><input type="checkbox" onchange="limitarSaboresPizza(this)" value="Colombianita"> Colombianita</label><label class="sabor-pill"><input type="checkbox" onchange="limitarSaboresPizza(this)" value="Campesina"> Campesina</label><label class="sabor-pill"><input type="checkbox" onchange="limitarSaboresPizza(this)" value="Carnes"> Carnes</label><label class="sabor-pill"><input type="checkbox" onchange="limitarSaboresPizza(this)" value="De la Casa"> De la Casa</label><label class="sabor-pill"><input type="checkbox" onchange="limitarSaboresPizza(this)" value="Ciruela y Tocineta"> Ciruela y Tocineta</label><label class="sabor-pill"><input type="checkbox" onchange="limitarSaboresPizza(this)" value="Pizza Huevo"> Pizza Huevo</label><label class="sabor-pill"><input type="checkbox" onchange="limitarSaboresPizza(this)" value="Costillitas BBQ"> Costillitas BBQ</label><label class="sabor-pill"><input type="checkbox" onchange="limitarSaboresPizza(this)" value="Maranatha"> Maranatha</label><label class="sabor-pill"><input type="checkbox" onchange="limitarSaboresPizza(this)" value="Margarita"> Margarita</label><label class="sabor-pill"><input type="checkbox" onchange="limitarSaboresPizza(this)" value="Atún"> Atún</label><label class="sabor-pill"><input type="checkbox" onchange="limitarSaboresPizza(this)" value="Vegetariana"> Vegetariana</label><label class="sabor-pill"><input type="checkbox" onchange="limitarSaboresPizza(this)" value="Amarilla"> Amarilla</label><label class="sabor-pill"><input type="checkbox" onchange="limitarSaboresPizza(this)" value="Bacon"> Bacon</label><label class="sabor-pill"><input type="checkbox" onchange="limitarSaboresPizza(this)" value="Cántones"> Cántones</label><label class="sabor-pill"><input type="checkbox" onchange="limitarSaboresPizza(this)" value="TNT"> TNT</label><label class="sabor-pill"><input type="checkbox" onchange="limitarSaboresPizza(this)" value="Pollo Chorizo Miel Mostaza"> Pollo Chorizo Miel Mostaza</label><label class="sabor-pill"><input type="checkbox" onchange="limitarSaboresPizza(this)" value="Valencia"> Valencia</label><label class="sabor-pill"><input type="checkbox" onchange="limitarSaboresPizza(this)" value="Americana"> Americana</label><label class="sabor-pill"><input type="checkbox" onchange="limitarSaboresPizza(this)" value="Típica"> Típica</label>`;
+
+function generarTabs(item, cantidad) {
+  const cb = item.querySelector(".check-plato");
+  const limites = { "PizzaPersonal": 2, "PizzaSmall": 2, "PizzaMedium": 3, "PizzaExtraGrande": 4 };
+  const limite = limites[cb?.name] || 2;
+  const desc = item.querySelector(".descripcion");
+  if (!desc || desc.style.display === "none") return;
+
+  const saboresGuardados = [];
+  desc.querySelectorAll(".pizza-tab-panel").forEach((panel, i) => {
+    saboresGuardados[i] = [...panel.querySelectorAll('input[type="checkbox"]:checked')].map(s => s.value);
+  });
+
+  if (cantidad <= 1) {
+    desc.innerHTML = `<div class="pizza-tab-panel" data-idx="0"><strong style="color:rgba(245,166,35,0.8);font-size:11px;display:block;margin-bottom:7px;">🍕 Elige hasta ${limite} sabores:</strong><div class="sabores-pizza-wrap" style="display:flex;flex-wrap:wrap;gap:5px;">${SABORES_PIZZA_HTML}</div></div>`;
+    return;
+  }
+
+  let html = `<p style="font-size:11px;color:rgba(245,166,35,0.8);margin:0 0 8px 0;">🍕 Cada pizza puede tener sabores diferentes — elige por pestaña</p><div class="pizza-tabs-nav" style="display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap;">`;
+  for (let i = 0; i < cantidad; i++) {
+    html += `<button type="button" class="pizza-tab-btn" onclick="cambiarTab(this,${i})" style="padding:5px 12px;border-radius:20px;border:1px solid rgba(245,166,35,0.4);background:${i===0?'rgba(245,166,35,0.25)':'rgba(255,255,255,0.05)'};color:rgba(242,237,228,0.9);font-size:12px;cursor:pointer;">🍕 Pizza ${i+1}</button>`;
+  }
+  html += `</div>`;
+
+  for (let i = 0; i < cantidad; i++) {
+    html += `<div class="pizza-tab-panel" data-idx="${i}" style="display:${i===0?'block':'none'};">`;
+    if (i > 0) html += `<button type="button" onclick="copiarSaboresAnterior(this,${i})" style="margin-bottom:8px;margin-right:6px;padding:4px 12px;border-radius:15px;border:1px solid rgba(245,166,35,0.3);background:rgba(245,166,35,0.1);color:#f5a623;font-size:11px;cursor:pointer;">📋 Copiar sabores de Pizza ${i}</button>`;
+    html += `<strong style="color:rgba(245,166,35,0.8);font-size:11px;display:block;margin-bottom:7px;">🍕 Pizza ${i+1} — elige hasta ${limite} sabores:</strong><div class="sabores-pizza-wrap" style="display:flex;flex-wrap:wrap;gap:5px;">${SABORES_PIZZA_HTML}</div></div>`;
+  }
+
+  
+
+desc.innerHTML = html;
+
+  desc.querySelectorAll(".pizza-tab-panel").forEach((panel, i) => {
+    if (saboresGuardados[i]) {
+      panel.querySelectorAll('input[type="checkbox"]').forEach(s => {
+        if (saboresGuardados[i].includes(s.value)) s.checked = true;
+      });
+      actualizarContadorSabores(panel, limite);
+    }
+  });
+
+  const todosLosBtns = desc.querySelectorAll(".pizza-tab-btn");
+  const todosLosPaneles = desc.querySelectorAll(".pizza-tab-panel");
+  let irA = 0;
+  todosLosPaneles.forEach((p, i) => {
+    if (i > 0 && p.querySelectorAll('input[type="checkbox"]:checked').length === 0 && irA === 0) {
+      irA = i;
+    }
+  });
+  todosLosBtns.forEach((b, i) => {
+    b.style.background = i === irA ? "rgba(245,166,35,0.25)" : "rgba(255,255,255,0.05)";
+  });
+  todosLosPaneles.forEach((p, i) => {
+    p.style.display = i === irA ? "block" : "none";
+  });
+}
+
+function cambiarTab(btn, idx) {
+  const desc = btn.closest(".descripcion");
+  desc.querySelectorAll(".pizza-tab-btn").forEach((b, i) => {
+    b.style.background = i === idx ? "rgba(245,166,35,0.25)" : "rgba(255,255,255,0.05)";
+  });
+  desc.querySelectorAll(".pizza-tab-panel").forEach((p, i) => {
+    p.style.display = i === idx ? "block" : "none";
+  });
+}
+
+function copiarSaboresAnterior(btn, idx) {
+  const desc = btn.closest(".descripcion");
+  const item = btn.closest(".item");
+  const cb = item.querySelector(".check-plato");
+  const limites = { "PizzaPersonal": 2, "PizzaSmall": 2, "PizzaMedium": 3, "PizzaExtraGrande": 4 };
+  const limite = limites[cb?.name] || 2;
+  const panelAnterior = desc.querySelector(`.pizza-tab-panel[data-idx="${idx-1}"]`);
+  const panelActual = desc.querySelector(`.pizza-tab-panel[data-idx="${idx}"]`);
+  const saboresAnteriores = [...panelAnterior.querySelectorAll('input[type="checkbox"]:checked')].map(s => s.value);
+  panelActual.querySelectorAll('input[type="checkbox"]').forEach(s => {
+    s.checked = saboresAnteriores.includes(s.value);
+  });
+  actualizarContadorSabores(panelActual, limite);
+}
+
+function copiarSaboresATodas(btn, idxOrigen) {
+  const desc = btn.closest(".descripcion");
+  const item = btn.closest(".item");
+  const cb = item.querySelector(".check-plato");
+  const limites = { "PizzaPersonal": 2, "PizzaSmall": 2, "PizzaMedium": 3, "PizzaExtraGrande": 4 };
+  const limite = limites[cb?.name] || 2;
+  const panelOrigen = desc.querySelector(`.pizza-tab-panel[data-idx="${idxOrigen}"]`);
+  const saboresOrigen = [...panelOrigen.querySelectorAll('input[type="checkbox"]:checked')].map(s => s.value);
+  desc.querySelectorAll(".pizza-tab-panel").forEach(panel => {
+    panel.querySelectorAll('input[type="checkbox"]').forEach(s => {
+      s.checked = saboresOrigen.includes(s.value);
+    });
+    actualizarContadorSabores(panel, limite);
+  });
+}
+
+function cambiarCantidadPizza(btn, delta) {
+  const item = btn.closest(".item");
+  const input = item.querySelector(".cantidad");
+  if (!input || input.disabled) return;
+  const nueva = Math.max(1, Number(input.value) + delta);
+  input.value = nueva;
+  calcularTotal();
+  generarTabs(item, nueva);
+}
 
 // Evitar que cantidad quede en 0 cuando el item está seleccionado
 document.addEventListener("change", function(e) {

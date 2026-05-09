@@ -57,10 +57,14 @@
     <!-- PERSONAL -->
     <div class="item">
       <div class="item-linea">
-        <input type="checkbox" class="check-plato" name="PizzaPersonal" value="Pizza Personal" onchange="toggleCantidad(this);toggleDescripcion(this)">
+        <input type="checkbox" class="check-plato" name="PizzaPersonal" value="Pizza Personal" onchange="toggleCantidad(this);toggleDescripcion(this);generarTabs(this.closest('.item'),1)">
         <label>Personal — 2 sabores</label>
         <span>$18.000</span>
-        <input type="number" class="cantidad" value="0" min="0" disabled onchange="calcularTotal()">
+        <div class="cantidad-ctrl" style="display:inline-flex;align-items:center;gap:4px;">
+  <button type="button" onclick="cambiarCantidadPizza(this,-1)" style="width:22px;height:22px;border-radius:50%;border:1px solid rgba(245,166,35,0.6);background:transparent;color:#f5a623;font-size:14px;cursor:pointer;line-height:1;display:flex;align-items:center;justify-content:center;flex-shrink:0;">−</button>
+  <input type="number" class="cantidad" value="0" min="0" disabled onchange="calcularTotal();generarTabs(this.closest('.item'),Number(this.value))" style="width:30px;text-align:center;background:transparent;border:none;color:rgba(242,237,228,0.9);font-size:13px;font-weight:600;-moz-appearance:textfield;appearance:textfield;" onwheel="this.blur()">
+  <button type="button" onclick="cambiarCantidadPizza(this,1)" style="width:22px;height:22px;border-radius:50%;border:1px solid rgba(245,166,35,0.6);background:transparent;color:#f5a623;font-size:14px;cursor:pointer;line-height:1;display:flex;align-items:center;justify-content:center;flex-shrink:0;">+</button>
+</div>
       </div>
       <div class="descripcion">
         <strong style="color:rgba(245,166,35,0.8);font-size:11px;display:block;margin-bottom:7px;">🍕 Elige hasta 2 sabores:</strong>
@@ -119,10 +123,14 @@
     <!-- SMALL -->
     <div class="item">
       <div class="item-linea">
-        <input type="checkbox" class="check-plato" name="PizzaSmall" value="Pizza Small" onchange="toggleCantidad(this);toggleDescripcion(this)">
+        <input type="checkbox" class="check-plato" name="PizzaSmall" value="Pizza Small" onchange="toggleCantidad(this);toggleDescripcion(this);generarTabs(this.closest('.item'),1)">
         <label>Small — 2 sabores</label>
         <span>$53.000</span>
-        <input type="number" class="cantidad" value="0" min="0" disabled onchange="calcularTotal()">
+        <div class="cantidad-ctrl" style="display:inline-flex;align-items:center;gap:4px;">
+  <button type="button" onclick="cambiarCantidadPizza(this,-1)" style="width:22px;height:22px;border-radius:50%;border:1px solid rgba(245,166,35,0.6);background:transparent;color:#f5a623;font-size:14px;cursor:pointer;line-height:1;display:flex;align-items:center;justify-content:center;flex-shrink:0;">−</button>
+  <input type="number" class="cantidad" value="0" min="0" disabled onchange="calcularTotal();generarTabs(this.closest('.item'),Number(this.value))" style="width:30px;text-align:center;background:transparent;border:none;color:rgba(242,237,228,0.9);font-size:13px;font-weight:600;-moz-appearance:textfield;appearance:textfield;" onwheel="this.blur()">
+  <button type="button" onclick="cambiarCantidadPizza(this,1)" style="width:22px;height:22px;border-radius:50%;border:1px solid rgba(245,166,35,0.6);background:transparent;color:#f5a623;font-size:14px;cursor:pointer;line-height:1;display:flex;align-items:center;justify-content:center;flex-shrink:0;">+</button>
+</div>
       </div>
       <div class="descripcion">
         <strong style="color:rgba(245,166,35,0.8);font-size:11px;display:block;margin-bottom:7px;">🍕 Elige hasta 2 sabores:</strong>
@@ -181,10 +189,14 @@
     <!-- MEDIUM -->
     <div class="item">
       <div class="item-linea">
-        <input type="checkbox" class="check-plato" name="PizzaMedium" value="Pizza Medium" onchange="toggleCantidad(this);toggleDescripcion(this)">
+        <input type="checkbox" class="check-plato" name="PizzaMedium" value="Pizza Medium" onchange="toggleCantidad(this);toggleDescripcion(this);generarTabs(this.closest('.item'),1)">
         <label>Medium — 3 sabores</label>
         <span>$63.000</span>
-        <input type="number" class="cantidad" value="0" min="0" disabled onchange="calcularTotal()">
+        <div class="cantidad-ctrl" style="display:inline-flex;align-items:center;gap:4px;">
+  <button type="button" onclick="cambiarCantidadPizza(this,-1)" style="width:22px;height:22px;border-radius:50%;border:1px solid rgba(245,166,35,0.6);background:transparent;color:#f5a623;font-size:14px;cursor:pointer;line-height:1;display:flex;align-items:center;justify-content:center;flex-shrink:0;">−</button>
+  <input type="number" class="cantidad" value="0" min="0" disabled onchange="calcularTotal();generarTabs(this.closest('.item'),Number(this.value))" style="width:30px;text-align:center;background:transparent;border:none;color:rgba(242,237,228,0.9);font-size:13px;font-weight:600;-moz-appearance:textfield;appearance:textfield;" onwheel="this.blur()">
+  <button type="button" onclick="cambiarCantidadPizza(this,1)" style="width:22px;height:22px;border-radius:50%;border:1px solid rgba(245,166,35,0.6);background:transparent;color:#f5a623;font-size:14px;cursor:pointer;line-height:1;display:flex;align-items:center;justify-content:center;flex-shrink:0;">+</button>
+</div>
       </div>
       <div class="descripcion">
         <strong style="color:rgba(245,166,35,0.8);font-size:11px;display:block;margin-bottom:7px;">🍕 Elige hasta 3 sabores:</strong>
@@ -243,10 +255,14 @@
     <!-- EXTRA GRANDE -->
     <div class="item">
       <div class="item-linea">
-        <input type="checkbox" class="check-plato" name="PizzaExtraGrande" value="Pizza Extra Grande" onchange="toggleCantidad(this);toggleDescripcion(this)">
+        <input type="checkbox" class="check-plato" name="PizzaExtraGrande" value="Pizza Extra Grande" onchange="toggleCantidad(this);toggleDescripcion(this);generarTabs(this.closest('.item'),1)">
         <label>Extra Grande — 4 sabores</label>
         <span>$90.000</span>
-        <input type="number" class="cantidad" value="0" min="0" disabled onchange="calcularTotal()">
+        <div class="cantidad-ctrl" style="display:inline-flex;align-items:center;gap:4px;">
+  <button type="button" onclick="cambiarCantidadPizza(this,-1)" style="width:22px;height:22px;border-radius:50%;border:1px solid rgba(245,166,35,0.6);background:transparent;color:#f5a623;font-size:14px;cursor:pointer;line-height:1;display:flex;align-items:center;justify-content:center;flex-shrink:0;">−</button>
+  <input type="number" class="cantidad" value="0" min="0" disabled onchange="calcularTotal();generarTabs(this.closest('.item'),Number(this.value))" style="width:30px;text-align:center;background:transparent;border:none;color:rgba(242,237,228,0.9);font-size:13px;font-weight:600;-moz-appearance:textfield;appearance:textfield;" onwheel="this.blur()">
+  <button type="button" onclick="cambiarCantidadPizza(this,1)" style="width:22px;height:22px;border-radius:50%;border:1px solid rgba(245,166,35,0.6);background:transparent;color:#f5a623;font-size:14px;cursor:pointer;line-height:1;display:flex;align-items:center;justify-content:center;flex-shrink:0;">+</button>
+</div>
       </div>
       <div class="descripcion">
         <strong style="color:rgba(245,166,35,0.8);font-size:11px;display:block;margin-bottom:7px;">🍕 Elige hasta 4 sabores:</strong>
