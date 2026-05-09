@@ -1,6 +1,6 @@
 // ===== PRECIOS FIJOS =====
 const PRECIOS = {
-  PizzaPorcion:9500,
+  PizzaPorcionHawaiana:9500, PizzaPorcionCarnes:9500, PizzaPorcionPollo:9500, PizzaPorcionMexicana:9500,
 PizzaPersonal:18000, PizzaSmall:53000, PizzaMedium:63000, PizzaExtraGrande:90000,
   PanNapolitano:6000, PataconHogao:6000,
   MazorcadaGrande:35000, MazorcadaMini:25000, MazorcadaMaranatha4:80000,
