@@ -421,6 +421,75 @@ function cambiarCantidadPizza(btn, delta) {
   generarTabs(item, nueva);
 }
 
+// ===== PROMOCIONES POR DÍA =====
+function aplicarPromociones() {
+  const dia = new Date().getDay(); // 0=Dom, 2=Mar, 4=Jue
+
+  const banner = document.getElementById('promoBanner');
+  if (!banner) return;
+
+  // MARTES — Promo Hamburguesas
+  if (dia === 2) {
+    banner.innerHTML = `
+      <div style="background:linear-gradient(135deg,rgba(212,43,43,0.2),rgba(245,166,35,0.15));border:1px solid rgba(245,166,35,0.5);border-radius:8px;padding:14px 16px;margin-bottom:12px;text-align:center;">
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:3px;color:#f5a623;">🍔 MARTES DE HAMBURGUESAS</div>
+        <div style="font-size:13px;color:rgba(242,237,228,0.85);margin-top:6px;line-height:1.6;">Cualquier combo con papas y Coca-Cola 250ml <strong style="color:#ffd84d;">a solo $25.000</strong><br><span style="font-size:11px;opacity:0.6;">No aplica para Maranatha Doble</span></div>
+      </div>`;
+
+    // Bajar precios combo a $25.000
+    const promos = {
+      HambColombiana: 25000,
+      HambMexicana: 25000,
+      HambArgentina: 25000,
+      HambAmericana: 25000,
+      HambMaranatha: 25000,
+    };
+
+    document.querySelectorAll('.check-plato').forEach(cb => {
+      if (!promos[cb.name]) return;
+      const tamano = cb.closest('.item')?.querySelector('.tamano');
+      if (!tamano) return;
+      [...tamano.options].forEach(opt => {
+        if (opt.text.toLowerCase().includes('combo')) {
+          opt.value = promos[cb.name];
+          opt.text = `Combo Papas+Gaseosa — $25.000 🔥`;
+        }
+      });
+    });
+  }
+
+  // JUEVES — Promo Porciones Pizza
+  if (dia === 4) {
+    banner.innerHTML = `
+      <div style="background:linear-gradient(135deg,rgba(212,43,43,0.2),rgba(245,166,35,0.15));border:1px solid rgba(245,166,35,0.5);border-radius:8px;padding:14px 16px;margin-bottom:12px;text-align:center;">
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:3px;color:#f5a623;">🍕 JUEVES DE PIZZA</div>
+        <div style="font-size:13px;color:rgba(242,237,228,0.85);margin-top:6px;line-height:1.6;">Todas las porciones de pizza <strong style="color:#ffd84d;">a solo $8.000</strong><br><span style="font-size:11px;opacity:0.6;">Solo aplica para porciones individuales</span></div>
+      </div>`;
+
+    // Bajar porciones a $8.000
+    const porcioneNames = ['PizzaPorcionHawaiana','PizzaPorcionCarnes','PizzaPorcionPollo','PizzaPorcionMexicana'];
+    porcioneNames.forEach(name => {
+      const cb = document.querySelector(`input[name="${name}"]`);
+      if (!cb) return;
+      const span = cb.closest('.item-linea')?.querySelector('span');
+      if (span) span.textContent = '$8.000 🔥';
+      PRECIOS[name] = 8000;
+    });
+  }
+
+  // DOMINGO — Aviso Almuerzos
+  if (dia === 0) {
+    banner.innerHTML = `
+      <div style="background:linear-gradient(135deg,rgba(212,43,43,0.2),rgba(245,166,35,0.15));border:1px solid rgba(245,166,35,0.5);border-radius:8px;padding:14px 16px;margin-bottom:12px;text-align:center;">
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:3px;color:#f5a623;">🍽️ DOMINGOS DE ALMUERZO</div>
+        <div style="font-size:13px;color:rgba(242,237,228,0.85);margin-top:6px;line-height:1.6;">Los domingos tenemos almuerzos especiales<br><strong style="color:#ffd84d;">Consúltanos el menú del día</strong></div>
+        <a href="https://wa.me/573208940361" target="_blank" style="display:inline-block;margin-top:10px;background:#25D366;color:#fff;font-family:'Oswald',sans-serif;font-size:13px;font-weight:700;letter-spacing:1px;padding:8px 20px;border-radius:6px;text-decoration:none;">📲 Ver menú del día</a>
+      </div>`;
+  }
+}
+
+aplicarPromociones();
+
 // Evitar que cantidad quede en 0 cuando el item está seleccionado
 document.addEventListener("change", function(e) {
   if (e.target.classList.contains("cantidad")) {
