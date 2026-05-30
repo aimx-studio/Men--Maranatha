@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pizzería Maranatha</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@300;400;600;700&family=Barlow:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+
+<header>
+  <div class="header-bg"></div>
+  <div class="header-top-line"></div>
+  <div class="logo-wrap">
+    <div class="logo-placeholder">🍕 MARANATHA</div>
+  </div>
+  <p class="header-tagline">Alimentando Multitudes</p>
+  <div class="header-badges">
+    <span class="badge">🍕 Pizzas</span>
+    <span class="badge">🍔 Burgers</span>
+    <span class="badge">🥩 A la Carta</span>
+    <span class="badge">🍝 Pastas</span>
+    <span class="badge">🐟 Pescados</span>
+  </div>
+  <div class="header-bottom-line"></div>
+</header>
+
+<div id="promoBanner"></div>
+
+<form id="pedidoForm" onsubmit="enviarPedido(event)">
+
+<!-- ===== 01. PORCIÓN DE PIZZA ===== -->
+<section class="menu-section">
+  <h2 onclick="toggleMenu(this)">🍕 Porción de Pizza</h2>
+  <div class="platos">
+    <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="PizzaPorcionHawaiana" value="Pizza Porción Hawaiana" onchange="toggleCantidad(this)"><label>Porción Hawaiana</label><span>$9.500</span><input type="number" class="cantidad" value="0" min="0" disabled onchange="calcularTotal()"></div></div>
+    <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="PizzaPorcionCarnes" value="Pizza Porción Carnes" onchange="toggleCantidad(this)"><label>Porción Carnes</label><span>$9.500</span><input type="number" class="cantidad" value="0" min="0" disabled onchange="calcularTotal()"></div></div>
+    <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="PizzaPorcionPollo" value="Pizza Porción Pollo Champiñón" onchange="toggleCantidad(this)"><label>Porción Pollo Champiñón</label><span>$9.500</span><input type="number" class="cantidad" value="0" min="0" disabled onchange="calcularTotal()"></div></div>
+    <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="PizzaPorcionMexicana" value="Pizza Porción Mexicana" onchange="toggleCantidad(this)"><label>Porción Mexicana</label><span>$9.500</span><input type="number" class="cantidad" value="0" min="0" disabled onchange="calcularTotal()"></div></div>
+  </div>
+</section>
+
+<!-- ===== 02. PIZZAS ===== -->
+<section class="menu-section">
+  <h2 onclick="toggleMenu(this)">🍕 Pizzas — Elige Tamaño</h2>
+  <div class="platos">
+    <div class="precio-info">
+      <p class="precio-info-title">Tamaños y Precios</p>
+      <table>
+        <tr><td>Personal — 2 sabores, 4 mini porciones</td><td>$18.000</td></tr>
+        <tr><td>Small — 2 sabores, 6 porciones pequeñas</td><td>$53.000</td></tr>
+        <tr><td>Medium — 3 sabores, 8 porciones medianas</td><td>$63.000</td></tr>
+        <tr><td>Extra Grande — 4 sabores, 10 porciones grandes</td><td>$90.000</td></tr>
+      </table>
+    </div>
+
+    <!-- PERSONAL -->
+    <div class="item">
+      <div class="item-linea">
+        <input type="checkbox" class="check-plato" name="PizzaPersonal" value="Pizza Personal" onchange="toggleCantidad(this);toggleDescripcion(this);generarTabs(this.closest('.item'),1)">
+        <label>Personal — 2 sabores</label>
+        <span>$18.000</span>
+        <div class="cantidad-ctrl" style="display:inline-flex;align-items:center;gap:4px;">
+  <button type="button" onclick="cambiarCantidadPizza(this,-1)" style="width:22px;height:22px;border-radius:50%;border:1px solid rgba(245,166,35,0.6);background:transparent;color:#f5a623;font-size:14px;cursor:pointer;line-height:1;display:flex;align-items:center;justify-content:center;flex-shrink:0;">−</button>
+  <input type="number" class="cantidad" value="0" min="0" disabled onchange="calcularTotal();generarTabs(this.closest('.item'),Number(this.value))" style="width:30px;text-align:center;background:transparent;border:none;color:rgba(242,237,228,0.9);font-size:13px;font-weight:600;-moz-appearance:textfield;appearance:textfield;" onwheel="this.blur()">
+  <button type="button" onclick="cambiarCantidadPizza(this,1)" style="width:22px;height:22px;border-radius:50%;border:1px solid rgba(245,166,35,0.6);background:transparent;color:#f5a623;font-size:14px;cursor:pointer;line-height:1;display:flex;align-items:center;justify-content:center;flex-shrink:0;">+</button>
+</div>
+      </div>
+      <div class="descripcion">
+        <strong style="color:rgba(245,166,35,0.8);font-size:11px;display:block;margin-bottom:7px;">🍕 Elige hasta 2 sabores:</strong>
+        <div class="sabores-pizza-wrap" style="display:flex;flex-wrap:wrap;gap:5px;">
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Arequipe"> Arequipe</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Chocolate"> Chocolate</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Nutella"> Nutella</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="M&M"> M&M</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Veleña"> Veleña</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Hawaiana"> Hawaiana</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Durazno"> Durazno</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Tropical"> Tropical</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Aborrajada"> Aborrajada</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Tentación"> Tentación</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Oreo"> Oreo</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Pollo"> Pollo</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Pollo Champiñón"> Pollo Champiñón</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Pollo Durazno"> Pollo Durazno</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Pollo Maíz Tocineta"> Pollo Maíz Tocineta</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Pollo Verduras"> Pollo Verduras</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Pollo Piña"> Pollo Piña</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Pollo BBQ Tocineta"> Pollo BBQ Tocineta</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Pollo Miel Mostaza"> Pollo Miel Mostaza</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Ranchera"> Ranchera</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Mexicana"> Mexicana</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Argentina"> Argentina</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Napolitana"> Napolitana</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Bolognesa"> Bolognesa</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Española"> Española</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Criolla"> Criolla</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Mediterránea"> Mediterránea</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="New York"> New York</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Colombianita"> Colombianita</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Campesina"> Campesina</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Carnes"> Carnes</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="De la Casa"> De la Casa</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Ciruela y Tocineta"> Ciruela y Tocineta</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Pizza Huevo"> Pizza Huevo</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Costillitas BBQ"> Costillitas BBQ</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Maranatha"> Maranatha</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Margarita"> Margarita</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Atún"> Atún</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Vegetariana"> Vegetariana</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Amarilla"> Amarilla</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Bacon"> Bacon</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Cántones"> Cántones</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="TNT"> TNT</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Pollo Chorizo Miel Mostaza"> Pollo Chorizo Miel Mostaza</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Valencia"> Valencia</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Americana"> Americana</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Típica"> Típica</label>
+        </div>
+      </div>
+    </div>
+
+    <!-- SMALL -->
+    <div class="item">
+      <div class="item-linea">
+        <input type="checkbox" class="check-plato" name="PizzaSmall" value="Pizza Small" onchange="toggleCantidad(this);toggleDescripcion(this);generarTabs(this.closest('.item'),1)">
+        <label>Small — 2 sabores</label>
+        <span>$53.000</span>
+        <div class="cantidad-ctrl" style="display:inline-flex;align-items:center;gap:4px;">
+  <button type="button" onclick="cambiarCantidadPizza(this,-1)" style="width:22px;height:22px;border-radius:50%;border:1px solid rgba(245,166,35,0.6);background:transparent;color:#f5a623;font-size:14px;cursor:pointer;line-height:1;display:flex;align-items:center;justify-content:center;flex-shrink:0;">−</button>
+  <input type="number" class="cantidad" value="0" min="0" disabled onchange="calcularTotal();generarTabs(this.closest('.item'),Number(this.value))" style="width:30px;text-align:center;background:transparent;border:none;color:rgba(242,237,228,0.9);font-size:13px;font-weight:600;-moz-appearance:textfield;appearance:textfield;" onwheel="this.blur()">
+  <button type="button" onclick="cambiarCantidadPizza(this,1)" style="width:22px;height:22px;border-radius:50%;border:1px solid rgba(245,166,35,0.6);background:transparent;color:#f5a623;font-size:14px;cursor:pointer;line-height:1;display:flex;align-items:center;justify-content:center;flex-shrink:0;">+</button>
+</div>
+      </div>
+      <div class="descripcion">
+        <strong style="color:rgba(245,166,35,0.8);font-size:11px;display:block;margin-bottom:7px;">🍕 Elige hasta 2 sabores:</strong>
+        <div class="sabores-pizza-wrap" style="display:flex;flex-wrap:wrap;gap:5px;">
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Arequipe"> Arequipe</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Chocolate"> Chocolate</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Nutella"> Nutella</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="M&M"> M&M</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Veleña"> Veleña</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Hawaiana"> Hawaiana</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Durazno"> Durazno</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Tropical"> Tropical</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Aborrajada"> Aborrajada</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Tentación"> Tentación</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Oreo"> Oreo</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Pollo"> Pollo</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Pollo Champiñón"> Pollo Champiñón</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Pollo Durazno"> Pollo Durazno</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Pollo Maíz Tocineta"> Pollo Maíz Tocineta</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Pollo Verduras"> Pollo Verduras</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Pollo Piña"> Pollo Piña</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Pollo BBQ Tocineta"> Pollo BBQ Tocineta</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Pollo Miel Mostaza"> Pollo Miel Mostaza</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Ranchera"> Ranchera</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Mexicana"> Mexicana</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Argentina"> Argentina</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Napolitana"> Napolitana</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Bolognesa"> Bolognesa</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Española"> Española</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Criolla"> Criolla</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Mediterránea"> Mediterránea</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="New York"> New York</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Colombianita"> Colombianita</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Campesina"> Campesina</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Carnes"> Carnes</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="De la Casa"> De la Casa</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Ciruela y Tocineta"> Ciruela y Tocineta</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Pizza Huevo"> Pizza Huevo</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Costillitas BBQ"> Costillitas BBQ</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Maranatha"> Maranatha</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Margarita"> Margarita</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Atún"> Atún</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Vegetariana"> Vegetariana</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Amarilla"> Amarilla</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Bacon"> Bacon</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Cántones"> Cántones</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="TNT"> TNT</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Pollo Chorizo Miel Mostaza"> Pollo Chorizo Miel Mostaza</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Valencia"> Valencia</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Americana"> Americana</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Típica"> Típica</label>
+        </div>
+      </div>
+    </div>
+
+    <!-- MEDIUM -->
+    <div class="item">
+      <div class="item-linea">
+        <input type="checkbox" class="check-plato" name="PizzaMedium" value="Pizza Medium" onchange="toggleCantidad(this);toggleDescripcion(this);generarTabs(this.closest('.item'),1)">
+        <label>Medium — 3 sabores</label>
+        <span>$63.000</span>
+        <div class="cantidad-ctrl" style="display:inline-flex;align-items:center;gap:4px;">
+  <button type="button" onclick="cambiarCantidadPizza(this,-1)" style="width:22px;height:22px;border-radius:50%;border:1px solid rgba(245,166,35,0.6);background:transparent;color:#f5a623;font-size:14px;cursor:pointer;line-height:1;display:flex;align-items:center;justify-content:center;flex-shrink:0;">−</button>
+  <input type="number" class="cantidad" value="0" min="0" disabled onchange="calcularTotal();generarTabs(this.closest('.item'),Number(this.value))" style="width:30px;text-align:center;background:transparent;border:none;color:rgba(242,237,228,0.9);font-size:13px;font-weight:600;-moz-appearance:textfield;appearance:textfield;" onwheel="this.blur()">
+  <button type="button" onclick="cambiarCantidadPizza(this,1)" style="width:22px;height:22px;border-radius:50%;border:1px solid rgba(245,166,35,0.6);background:transparent;color:#f5a623;font-size:14px;cursor:pointer;line-height:1;display:flex;align-items:center;justify-content:center;flex-shrink:0;">+</button>
+</div>
+      </div>
+      <div class="descripcion">
+        <strong style="color:rgba(245,166,35,0.8);font-size:11px;display:block;margin-bottom:7px;">🍕 Elige hasta 3 sabores:</strong>
+        <div class="sabores-pizza-wrap" style="display:flex;flex-wrap:wrap;gap:5px;">
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Arequipe"> Arequipe</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Chocolate"> Chocolate</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Nutella"> Nutella</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="M&M"> M&M</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Veleña"> Veleña</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Hawaiana"> Hawaiana</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Durazno"> Durazno</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Tropical"> Tropical</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Aborrajada"> Aborrajada</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Tentación"> Tentación</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Oreo"> Oreo</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Pollo"> Pollo</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Pollo Champiñón"> Pollo Champiñón</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Pollo Durazno"> Pollo Durazno</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Pollo Maíz Tocineta"> Pollo Maíz Tocineta</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Pollo Verduras"> Pollo Verduras</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Pollo Piña"> Pollo Piña</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Pollo BBQ Tocineta"> Pollo BBQ Tocineta</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Pollo Miel Mostaza"> Pollo Miel Mostaza</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Ranchera"> Ranchera</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Mexicana"> Mexicana</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Argentina"> Argentina</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Napolitana"> Napolitana</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Bolognesa"> Bolognesa</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Española"> Española</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Criolla"> Criolla</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Mediterránea"> Mediterránea</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="New York"> New York</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Colombianita"> Colombianita</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Campesina"> Campesina</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Carnes"> Carnes</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="De la Casa"> De la Casa</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Ciruela y Tocineta"> Ciruela y Tocineta</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Pizza Huevo"> Pizza Huevo</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Costillitas BBQ"> Costillitas BBQ</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Maranatha"> Maranatha</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Margarita"> Margarita</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Atún"> Atún</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Vegetariana"> Vegetariana</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Amarilla"> Amarilla</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Bacon"> Bacon</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Cántones"> Cántones</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="TNT"> TNT</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Pollo Chorizo Miel Mostaza"> Pollo Chorizo Miel Mostaza</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Valencia"> Valencia</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Americana"> Americana</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Típica"> Típica</label>
+        </div>
+      </div>
+    </div>
+
+    <!-- EXTRA GRANDE -->
+    <div class="item">
+      <div class="item-linea">
+        <input type="checkbox" class="check-plato" name="PizzaExtraGrande" value="Pizza Extra Grande" onchange="toggleCantidad(this);toggleDescripcion(this);generarTabs(this.closest('.item'),1)">
+        <label>Extra Grande — 4 sabores</label>
+        <span>$90.000</span>
+        <div class="cantidad-ctrl" style="display:inline-flex;align-items:center;gap:4px;">
+  <button type="button" onclick="cambiarCantidadPizza(this,-1)" style="width:22px;height:22px;border-radius:50%;border:1px solid rgba(245,166,35,0.6);background:transparent;color:#f5a623;font-size:14px;cursor:pointer;line-height:1;display:flex;align-items:center;justify-content:center;flex-shrink:0;">−</button>
+  <input type="number" class="cantidad" value="0" min="0" disabled onchange="calcularTotal();generarTabs(this.closest('.item'),Number(this.value))" style="width:30px;text-align:center;background:transparent;border:none;color:rgba(242,237,228,0.9);font-size:13px;font-weight:600;-moz-appearance:textfield;appearance:textfield;" onwheel="this.blur()">
+  <button type="button" onclick="cambiarCantidadPizza(this,1)" style="width:22px;height:22px;border-radius:50%;border:1px solid rgba(245,166,35,0.6);background:transparent;color:#f5a623;font-size:14px;cursor:pointer;line-height:1;display:flex;align-items:center;justify-content:center;flex-shrink:0;">+</button>
+</div>
+      </div>
+      <div class="descripcion">
+        <strong style="color:rgba(245,166,35,0.8);font-size:11px;display:block;margin-bottom:7px;">🍕 Elige hasta 4 sabores:</strong>
+        <div class="sabores-pizza-wrap" style="display:flex;flex-wrap:wrap;gap:5px;">
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Arequipe"> Arequipe</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Chocolate"> Chocolate</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Nutella"> Nutella</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="M&M"> M&M</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Veleña"> Veleña</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Hawaiana"> Hawaiana</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Durazno"> Durazno</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Tropical"> Tropical</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Aborrajada"> Aborrajada</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Tentación"> Tentación</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Oreo"> Oreo</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Pollo"> Pollo</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Pollo Champiñón"> Pollo Champiñón</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Pollo Durazno"> Pollo Durazno</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Pollo Maíz Tocineta"> Pollo Maíz Tocineta</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Pollo Verduras"> Pollo Verduras</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Pollo Piña"> Pollo Piña</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Pollo BBQ Tocineta"> Pollo BBQ Tocineta</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Pollo Miel Mostaza"> Pollo Miel Mostaza</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Ranchera"> Ranchera</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Mexicana"> Mexicana</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Argentina"> Argentina</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Napolitana"> Napolitana</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Bolognesa"> Bolognesa</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Española"> Española</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Criolla"> Criolla</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Mediterránea"> Mediterránea</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="New York"> New York</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Colombianita"> Colombianita</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Campesina"> Campesina</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Carnes"> Carnes</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="De la Casa"> De la Casa</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Ciruela y Tocineta"> Ciruela y Tocineta</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Pizza Huevo"> Pizza Huevo</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Costillitas BBQ"> Costillitas BBQ</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Maranatha"> Maranatha</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Margarita"> Margarita</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Atún"> Atún</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Vegetariana"> Vegetariana</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Amarilla"> Amarilla</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Bacon"> Bacon</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Cántones"> Cántones</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="TNT"> TNT</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Pollo Chorizo Miel Mostaza"> Pollo Chorizo Miel Mostaza</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Valencia"> Valencia</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Americana"> Americana</label>
+          <label class="sabor-pill"><input type="checkbox" name="sabores-pizza[]" onchange="limitarSaboresPizza(this)" value="Típica"> Típica</label>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== 03. PIZZAS ESPECIALES ===== -->
+<section class="menu-section">
+  <h2 onclick="toggleMenu(this)">🔥 Pizzas Especiales</h2>
+  <div class="platos">
+    <div class="precio-info">
+      <p class="precio-info-title">Tamaños y Precios</p>
+      <table>
+        <tr><td>Personal: 4 mini porciones</td><td>$38.000</td></tr>
+        <tr><td>Small: 6 porciones pequeñas</td><td>$73.000</td></tr>
+        <tr><td>Medium: 8 pociones medianas</td><td>$85.000</td></tr>
+        <tr><td>Extra Grande: 10 porciones grandes</td><td>$140.000</td></tr>
+      </table>
+    </div>
+    <div class="item">
+      <div class="item-linea">
+        <input type="checkbox" class="check-plato" name="PizzaBurguer" value="Pizza Burguer" onchange="toggleCantidad(this);toggleDescripcion(this)">
+        <label>Pizza Burguer</label>
+        <select class="tamano" onchange="calcularTotal()">
+          <option value="38000">Personal — $38.000</option>
+          <option value="73000">Small — $73.000</option>
+          <option value="85000">Medium — $85.000</option>
+          <option value="140000">Extra Grande — $140.000</option>
+        </select>
+        <span>$38.000</span>
+        <input type="number" class="cantidad" name="PizzaBurguerCantidad" value="0" min="0" disabled onchange="calcularTotal()">
+      </div>
+      <div class="descripcion">Carne Molida · Lechuga · Tomate · Cebolla · Queso Mozarella · Queso Chedar.</div>
+    </div>
+    <div class="item">
+      <div class="item-linea">
+        <input type="checkbox" class="check-plato" name="PizzaPerro" value="Pizza Perro" onchange="toggleCantidad(this);toggleDescripcion(this)">
+        <label>Pizza Perro</label>
+        <select class="tamano" onchange="calcularTotal()">
+          <option value="38000">Personal — $38.000</option>
+          <option value="73000">Small — $73.000</option>
+          <option value="85000">Medium — $85.000</option>
+          <option value="140000">Extra Grande — $140.000</option>
+        </select>
+        <span>$38.000</span>
+        <input type="number" class="cantidad" name="PizzaPerroCantidad" value="0" min="0" disabled onchange="calcularTotal()">
+      </div>
+      <div class="descripcion">Salchicha Americana · Cebolla en Cuadritos · Papa Triturada · Queso Mozarella · Huevos de Codorniz · Salsa de la Casa.</div>
+    </div>
+    <div class="item">
+      <div class="item-linea">
+        <input type="checkbox" class="check-plato" name="Salchipizza" value="Salchipizza" onchange="toggleCantidad(this);toggleDescripcion(this)">
+        <label>Salchipizza</label>
+        <select class="tamano" onchange="calcularTotal()">
+          <option value="38000">Personal — $38.000</option>
+          <option value="73000">Small — $73.000</option>
+          <option value="85000">Medium — $85.000</option>
+          <option value="140000">Extra Grande — $140.000</option>
+        </select>
+        <span>$38.000</span>
+        <input type="number" class="cantidad" name="SalchipizzaCantidad" value="0" min="0" disabled onchange="calcularTotal()">
+      </div>
+      <div class="descripcion">Salchicha Americana · Papa Francesa · Queso Mozarella · Salsa de la Casa.</div>
+    </div>
+    <div class="item">
+      <div class="item-linea">
+        <input type="checkbox" class="check-plato" name="PizzaMarinera" value="Pizza Marinera" onchange="toggleCantidad(this);toggleDescripcion(this)">
+        <label>Pizza Marinera</label>
+        <select class="tamano" onchange="calcularTotal()">
+          <option value="38000">Personal — $38.000</option>
+          <option value="73000">Small — $73.000</option>
+          <option value="85000">Medium — $85.000</option>
+          <option value="140000">Extra Grande — $140.000</option>
+        </select>
+        <span>$38.000</span>
+        <input type="number" class="cantidad" name="PizzaMarineraCantidad" value="0" min="0" disabled onchange="calcularTotal()">
+      </div>
+      <div class="descripcion">Camarones · Trocitos de Pescado · Atún · Especias · Queso Mozarella.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 04. ENTRADAS ===== -->
+<section class="menu-section">
+  <h2 onclick="toggleMenu(this)">🥖 Entradas</h2>
+  <div class="platos">
+    <div class="item">
+      <div class="item-linea">
+        <input type="checkbox" class="check-plato" name="PanNapolitano" value="Pan Napolitano" onchange="toggleCantidad(this);toggleDescripcion(this)">
+        <label>Pan Napolitano [x2]</label>
+        <span>$6.000</span>
+        <input type="number" class="cantidad" name="PanNapolitanoCantidad" value="0" min="0" disabled onchange="calcularTotal()">
+      </div>
+      <div class="descripcion">Dos unidades de pan napolitano.</div>
+    </div>
+    <div class="item">
+      <div class="item-linea">
+        <input type="checkbox" class="check-plato" name="PataconHogao" value="Patacón con Hogao" onchange="toggleCantidad(this);toggleDescripcion(this)">
+        <label>Patacón con Hogao [x4]</label>
+        <span>$6.000</span>
+        <input type="number" class="cantidad" name="PataconHogaoCantidad" value="0" min="0" disabled onchange="calcularTotal()">
+      </div>
+      <div class="descripcion">Cuatro unidades de patacón con hogao.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 05. HAMBURGUESAS ===== -->
+<section class="menu-section">
+  <h2 onclick="toggleMenu(this)">🍔 Hamburguesas</h2>
+  <div class="platos">
+    <div class="item">
+      <div class="item-linea">
+        <input type="checkbox" class="check-plato" name="HambSencilla" value="Hamburguesa Sencilla" onchange="toggleCantidad(this);toggleDescripcion(this)">
+        <label>Sencilla</label>
+        <select class="tamano" onchange="calcularTotal()">
+          <option value="18000">Solo — $18.000</option>
+          <option value="25000">Combo Papas+Gaseosa — $25.000</option>
+        </select>
+        <span>$18.000</span>
+        <input type="number" class="cantidad" name="HambSencillaCantidad" value="0" min="0" disabled onchange="calcularTotal()">
+      </div>
+      <div class="descripcion">Carne de Res · Queso · Lechuga · Tomate.</div>
+    </div>
+    <div class="item">
+      <div class="item-linea">
+        <input type="checkbox" class="check-plato" name="HambColombiana" value="Hamburguesa Colombiana" onchange="toggleCantidad(this);toggleDescripcion(this)">
+        <label>Colombiana</label>
+        <select class="tamano" onchange="calcularTotal()">
+          <option value="26000">Solo — $26.000</option>
+          <option value="35000">Combo Papas+Gaseosa — $35.000</option>
+        </select>
+        <span>$26.000</span>
+        <input type="number" class="cantidad" name="HambColombianaCantidad" value="0" min="0" disabled onchange="calcularTotal()">
+      </div>
+      <div class="descripcion">Carne de Res · Tocineta · Huevo Frito · Cebolla Grille · Maduro · Queso · Hogao.</div>
+    </div>
+    <div class="item">
+      <div class="item-linea">
+        <input type="checkbox" class="check-plato" name="HambMexicana" value="Hamburguesa Mexicana" onchange="toggleCantidad(this);toggleDescripcion(this)">
+        <label>Mexicana</label>
+        <select class="tamano" onchange="calcularTotal()">
+          <option value="26000">Solo — $26.000</option>
+          <option value="35000">Combo Papas+Gaseosa — $35.000</option>
+        </select>
+        <span>$26.000</span>
+        <input type="number" class="cantidad" name="HambMexicanaCantidad" value="0" min="0" disabled onchange="calcularTotal()">
+      </div>
+      <div class="descripcion">Carne de Res · Lechuga · Queso · Guacamole · Pico de Gallo · Tostacos.</div>
+    </div>
+    <div class="item">
+      <div class="item-linea">
+        <input type="checkbox" class="check-plato" name="HambArgentina" value="Hamburguesa Argentina" onchange="toggleCantidad(this);toggleDescripcion(this)">
+        <label>Argentina</label>
+        <select class="tamano" onchange="calcularTotal()">
+          <option value="26000">Solo — $26.000</option>
+          <option value="35000">Combo Papas+Gaseosa — $35.000</option>
+        </select>
+        <span>$26.000</span>
+        <input type="number" class="cantidad" name="HambArgentinaCantidad" value="0" min="0" disabled onchange="calcularTotal()">
+      </div>
+      <div class="descripcion">Carne de Res · Queso · Chorizo · Lechuga · Chimichurri.</div>
+    </div>
+    <div class="item">
+      <div class="item-linea">
+        <input type="checkbox" class="check-plato" name="HambAmericana" value="Hamburguesa Americana" onchange="toggleCantidad(this);toggleDescripcion(this)">
+        <label>Americana</label>
+        <select class="tamano" onchange="calcularTotal()">
+          <option value="26000">Solo — $26.000</option>
+          <option value="35000">Combo Papas+Gaseosa — $35.000</option>
+        </select>
+        <span>$26.000</span>
+        <input type="number" class="cantidad" name="HambAmericanaCantidad" value="0" min="0" disabled onchange="calcularTotal()">
+      </div>
+      <div class="descripcion">Dos Carnes de Res · Tomate · Queso.</div>
+    </div>
+    <div class="item">
+      <div class="item-linea">
+        <input type="checkbox" class="check-plato" name="HambMaranatha" value="Hamburguesa Maranatha" onchange="toggleCantidad(this);toggleDescripcion(this)">
+        <label>Maranatha</label>
+        <select class="tamano" onchange="calcularTotal()">
+          <option value="28000">Solo — $28.000</option>
+          <option value="38000">Combo Papas+Gaseosa — $38.000</option>
+        </select>
+        <span>$28.000</span>
+        <input type="number" class="cantidad" name="HambMaranathaCantidad" value="0" min="0" disabled onchange="calcularTotal()">
+      </div>
+      <div class="descripcion">Carne de Res · Lechuga · Cebolla Grille BBQ · Tomate · Champiñón · Pollo Desmechado · Huevo de Codorniz · Tocineta · Chorizo · Chedar · Queso Mozarella.</div>
+    </div>
+    <div class="item">
+      <div class="item-linea">
+        <input type="checkbox" class="check-plato" name="HambMaranathaDoble" value="Hamburguesa Maranatha Doble" onchange="toggleCantidad(this);toggleDescripcion(this)">
+        <label>Maranatha Doble</label>
+        <select class="tamano" onchange="calcularTotal()">
+          <option value="40000">Solo — $40.000</option>
+          <option value="50000">Combo Papas+Gaseosa — $50.000</option>
+        </select>
+        <span>$40.000</span>
+        <input type="number" class="cantidad" name="HambMaranathaDoблeCantidad" value="0" min="0" disabled onchange="calcularTotal()">
+      </div>
+      <div class="descripcion">Carne de Res x2 · Lechuga · Cebolla Grille BBQ · Tomate · Champiñón · Pollo Desmechado · Huevo de Codorniz · Tocineta · Chorizo · Chedar · Queso Mozarella.</div>
+    </div>
+    <div class="nota-item">💡 Puedes cambiar el pan por Plátano Maduro o Arepa +$6.000 — indícalo en Especificaciones</div>
+  </div>
+</section>
+
+<!-- ===== 06. PERRO CALIENTE ===== -->
+<section class="menu-section">
+  <h2 onclick="toggleMenu(this)">🌭 Perro Caliente</h2>
+  <div class="platos">
+    <div class="item">
+      <div class="item-linea">
+        <input type="checkbox" class="check-plato" name="PerroSencillo" value="Perro Caliente Sencillo" onchange="toggleCantidad(this);toggleDescripcion(this)">
+        <label>Sencillo</label>
+        <select class="tamano" onchange="calcularTotal()">
+          <option value="12000">Solo — $12.000</option>
+          <option value="20000">Combo Papas+Gaseosa — $20.000</option>
+        </select>
+        <span>$12.000</span>
+        <input type="number" class="cantidad" name="PerroSencilloCantidad" value="0" min="0" disabled onchange="calcularTotal()">
+      </div>
+      <div class="descripcion">Salchicha Americana · Queso · Papa Triturada · Salsas.</div>
+    </div>
+    <div class="item">
+      <div class="item-linea">
+        <input type="checkbox" class="check-plato" name="PerroAmericano" value="Perro Caliente Americano" onchange="toggleCantidad(this);toggleDescripcion(this)">
+        <label>Americano</label>
+        <select class="tamano" onchange="calcularTotal()">
+          <option value="20000">Solo — $20.000</option>
+          <option value="27000">Combo Papas+Gaseosa — $27.000</option>
+        </select>
+        <span>$20.000</span>
+        <input type="number" class="cantidad" name="PerroAmericanoCantidad" value="0" min="0" disabled onchange="calcularTotal()">
+      </div>
+      <div class="descripcion">Salchicha Americana · Cebolla · Piña · Queso · Chedar · Papa Triturada.</div>
+    </div>
+    <div class="item">
+      <div class="item-linea">
+        <input type="checkbox" class="check-plato" name="PerroMexicano" value="Perro Caliente Mexicano" onchange="toggleCantidad(this);toggleDescripcion(this)">
+        <label>Mexicano</label>
+        <select class="tamano" onchange="calcularTotal()">
+          <option value="20000">Solo — $20.000</option>
+          <option value="27000">Combo Papas+Gaseosa — $27.000</option>
+        </select>
+        <span>$20.000</span>
+        <input type="number" class="cantidad" name="PerroMexicanoCantidad" value="0" min="0" disabled onchange="calcularTotal()">
+      </div>
+      <div class="descripcion">Salchicha Americana · Pico de Gallo · Chedar · Tacos · Huevo de Codorniz.</div>
+    </div>
+    <div class="item">
+      <div class="item-linea">
+        <input type="checkbox" class="check-plato" name="PerroMaranatha" value="Perro Caliente Maranatha" onchange="toggleCantidad(this);toggleDescripcion(this)">
+        <label>Maranatha</label>
+        <select class="tamano" onchange="calcularTotal()">
+          <option value="25000">Solo — $25.000</option>
+          <option value="30000">Combo Papas+Gaseosa — $30.000</option>
+        </select>
+        <span>$25.000</span>
+        <input type="number" class="cantidad" name="PerroMaranathaCantidad" value="0" min="0" disabled onchange="calcularTotal()">
+      </div>
+      <div class="descripcion">Salchicha Americana · Cebolla BBQ · Pollo · Queso · Chorizo · Chedar · Tocineta · Champiñón · Papa Triturada · Salsas · Huevos de Codorniz.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 07. MAZORCADAS ===== -->
+<section class="menu-section">
+  <h2 onclick="toggleMenu(this)">🌽 Mazorcadas</h2>
+  <div class="platos">
+    <div class="item">
+      <div class="item-linea">
+        <input type="checkbox" class="check-plato" name="MazorcadaGrande" value="Mazorcada Grande" onchange="toggleCantidad(this);toggleDescripcion(this)">
+        <label>Mazorcada Grande</label>
+        <span>$35.000</span>
+        <input type="number" class="cantidad" name="MazorcadaGrandeCantidad" value="0" min="0" disabled onchange="calcularTotal()">
+      </div>
+      <div class="descripcion">Carne Desmechada · Pollo · Chorizo · Tocineta · Champiñón · Lechuga Tartara · Chedar · Queso · Huevo de Codorniz · Papa Triturada.</div>
+    </div>
+    <div class="item">
+      <div class="item-linea">
+        <input type="checkbox" class="check-plato" name="MazorcadaMini" value="Mazorcada Mini" onchange="toggleCantidad(this);toggleDescripcion(this)">
+        <label>Mazorcada Mini</label>
+        <span>$25.000</span>
+        <input type="number" class="cantidad" name="MazorcadaMiniCantidad" value="0" min="0" disabled onchange="calcularTotal()">
+      </div>
+      <div class="descripcion">Carne Desmechada · Pollo · Chorizo · Tocineta · Champiñón · Lechuga Tartara · Chedar · Queso · Huevo de Codorniz · Papa Triturada.</div>
+    </div>
+    <div class="item">
+      <div class="item-linea">
+        <input type="checkbox" class="check-plato" name="MazorcadaMaranatha4" value="Mazorcada Maranatha (4 personas)" onchange="toggleCantidad(this);toggleDescripcion(this)">
+        <label>Maranatha — 4 personas</label>
+        <span>$80.000</span>
+        <input type="number" class="cantidad" name="MazorcadaMaranatha4Cantidad" value="0" min="0" disabled onchange="calcularTotal()">
+      </div>
+      <div class="descripcion">Carne Desmechada · Pollo · Chorizo · Tocineta · Champiñón · Lechuga · Tartara · Chedar · Queso · Huevo de Codorniz · Papa Triturada · Plátano Maduro · Salsa de la Casa · Salsa de Maíz.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 08. PANZEROTTI / CALZONE ===== -->
+<section class="menu-section">
+  <h2 onclick="toggleMenu(this)">🥟 Panzerotti / Calzone — $20.000</h2>
+  <div class="platos">
+    <div class="item">
+      <div class="item-linea">
+        <input type="checkbox" class="check-plato" name="PanzHawaiano" value="Panzerotti Hawaiano" onchange="toggleCantidad(this);toggleDescripcion(this)">
+        <label>Hawaiano</label>
+        <span>$20.000</span>
+        <input type="number" class="cantidad" name="PanzHawaianoCantidad" value="0" min="0" disabled onchange="calcularTotal()">
+      </div>
+      <div class="descripcion">Piña · Jamón · Queso.</div>
+    </div>
+    <div class="item">
+      <div class="item-linea">
+        <input type="checkbox" class="check-plato" name="PanzCarnes" value="Panzerotti De Carnes" onchange="toggleCantidad(this);toggleDescripcion(this)">
+        <label>De Carnes</label>
+        <span>$20.000</span>
+        <input type="number" class="cantidad" name="PanzCarnesCantidad" value="0" min="0" disabled onchange="calcularTotal()">
+      </div>
+      <div class="descripcion">Carne Desmechada · Jamón · Queso.</div>
+    </div>
+    <div class="item">
+      <div class="item-linea">
+        <input type="checkbox" class="check-plato" name="PanzRanchero" value="Panzerotti Ranchero" onchange="toggleCantidad(this);toggleDescripcion(this)">
+        <label>Ranchero</label>
+        <span>$20.000</span>
+        <input type="number" class="cantidad" name="PanzRancheroCantidad" value="0" min="0" disabled onchange="calcularTotal()">
+      </div>
+      <div class="descripcion">Chorizo · Salchicha Americana · Cebolla en Cuadritos · Queso.</div>
+    </div>
+    <div class="item">
+      <div class="item-linea">
+        <input type="checkbox" class="check-plato" name="PanzMaranatha" value="Panzerotti Maranatha" onchange="toggleCantidad(this);toggleDescripcion(this)">
+        <label>Maranatha</label>
+        <span>$20.000</span>
+        <input type="number" class="cantidad" name="PanzMaranathaCantidad" value="0" min="0" disabled onchange="calcularTotal()">
+      </div>
+      <div class="descripcion">Salsa Bolognesa · Pollo Desmechado · Champiñón · Queso.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 09. SALCHIPAPA ===== -->
+<section class="menu-section">
+  <h2 onclick="toggleMenu(this)">🍟 Salchipapa</h2>
+  <div class="platos">
+    <div class="item">
+      <div class="item-linea">
+        <input type="checkbox" class="check-plato" name="SalchipapaSencilla" value="Salchipapa Sencilla" onchange="toggleCantidad(this);toggleDescripcion(this)">
+        <label>Sencilla</label>
+        <span>$15.000</span>
+        <input type="number" class="cantidad" name="SalchipapaSencillaCantidad" value="0" min="0" disabled onchange="calcularTotal()">
+      </div>
+      <div class="descripcion">Salchicha Americana · Papa a la Francesa · Croqueta de Yuca.</div>
+    </div>
+    <div class="item">
+      <div class="item-linea">
+        <input type="checkbox" class="check-plato" name="SalchipapaEspecial" value="Salchipapa Especial" onchange="toggleCantidad(this);toggleDescripcion(this)">
+        <label>Especial</label>
+        <span>$24.000</span>
+        <input type="number" class="cantidad" name="SalchipapaEspecialCantidad" value="0" min="0" disabled onchange="calcularTotal()">
+      </div>
+      <div class="descripcion">Salchicha Americana · Papa a la Francesa · Croqueta de Yuca · Huevos de Codorniz · Queso.</div>
+    </div>
+    <div class="item">
+      <div class="item-linea">
+        <input type="checkbox" class="check-plato" name="SalchipapaMaranatha" value="Salchipapa Maranatha" onchange="toggleCantidad(this);toggleDescripcion(this)">
+        <label>Maranatha</label>
+        <span>$40.000</span>
+        <input type="number" class="cantidad" name="SalchipapaMaranathaCantidad" value="0" min="0" disabled onchange="calcularTotal()">
+      </div>
+      <div class="descripcion">Salchicha Americana · Papa a la Francesa · Croqueta de Yuca · Queso · Chedar · Papa Criolla · Base de Lechuga.</div>
+    </div>
+    <div class="item">
+      <div class="item-linea">
+        <input type="checkbox" class="check-plato" name="SalchipapaCosteña" value="Salchipapa Costeña" onchange="toggleCantidad(this);toggleDescripcion(this)">
+        <label>Costeña</label>
+        <span>$50.000</span>
+        <input type="number" class="cantidad" name="SalchipapaCosteñaCantidad" value="0" min="0" disabled onchange="calcularTotal()">
+      </div>
+      <div class="descripcion">Salchicha · Chorizo · Lechuga · Tartara · Piña · Papa Francesa y Triturada · Queso Costeño · Pollo en Cuadritos · Salsas.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 10. LASAGNAS ===== -->
+<section class="menu-section">
+  <h2 onclick="toggleMenu(this)">🍝 Lasagnas</h2>
+  <div class="platos">
+    <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="LasagnaBolognesa" value="Lasagna Bolognesa" onchange="toggleCantidad(this);toggleDescripcion(this)"><label>Bolognesa</label><span>$22.000</span><input type="number" class="cantidad" name="LasagnaBolgonesaCantidad" value="0" min="0" disabled onchange="calcularTotal()"></div><div class="descripcion">Salsa Bolognesa · Queso · Parmesano. Incluye Pan al Ajillo.</div></div>
+    <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="LasagnaPollo" value="Lasagna de Pollo" onchange="toggleCantidad(this);toggleDescripcion(this)"><label>De Pollo</label><span>$27.000</span><input type="number" class="cantidad" name="LasagnaPolloCantidad" value="0" min="0" disabled onchange="calcularTotal()"></div><div class="descripcion">Salsa Bolognesa · Pollo Desmechado · Queso · Parmesano. Incluye Pan al Ajillo.</div></div>
+    <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="LasagnaPolloJamon" value="Lasagna Pollo Jamón" onchange="toggleCantidad(this);toggleDescripcion(this)"><label>Pollo Jamón</label><span>$29.000</span><input type="number" class="cantidad" name="LasagnaPolloJamonCantidad" value="0" min="0" disabled onchange="calcularTotal()"></div><div class="descripcion">Salsa Bolognesa · Pollo Desmechado · Jamón · Queso Doble Crema · Parmesano. Incluye Pan al Ajillo.</div></div>
+    <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="LasagnaPolloChampinon" value="Lasagna Pollo Champiñón" onchange="toggleCantidad(this);toggleDescripcion(this)"><label>Pollo Champiñón</label><span>$29.000</span><input type="number" class="cantidad" name="LasagnaPolloChampínonCantidad" value="0" min="0" disabled onchange="calcularTotal()"></div><div class="descripcion">Salsa Bolognesa · Pollo Desmechado · Champiñón · Queso Doble Crema · Parmesano. Incluye Pan al Ajillo.</div></div>
+    <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="LasagnaMaranatha" value="Lasagna Maranatha" onchange="toggleCantidad(this);toggleDescripcion(this)"><label>Maranatha</label><span>$30.000</span><input type="number" class="cantidad" name="LasagnaMaranathaCantidad" value="0" min="0" disabled onchange="calcularTotal()"></div><div class="descripcion">Salsa Bolognesa · Pollo Desmechado · Champiñón · Jamón · Queso Doble Crema · Parmesano. Incluye Pan al Ajillo.</div></div>
+    <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="LasagnaMarinera" value="Lasagna Marinera" onchange="toggleCantidad(this);toggleDescripcion(this)"><label>Marinera</label><span>$35.000</span><input type="number" class="cantidad" name="LasagnaMarineraCantidad" value="0" min="0" disabled onchange="calcularTotal()"></div><div class="descripcion">Salsa Marinera · Camarones · Pescado · Palmitos · Queso Doble Crema · Parmesano. Incluye Pan al Ajillo.</div></div>
+  </div>
+</section>
+
+<!-- ===== 11. ESPAGUETTI ===== -->
+<section class="menu-section">
+  <h2 onclick="toggleMenu(this)">🍝 Espaguetti</h2>
+  <div class="platos">
+    <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="EspaBolognesa" value="Espaguetti Bolognesa" onchange="toggleCantidad(this);toggleDescripcion(this)"><label>Bolognesa</label><span>$26.000</span><input type="number" class="cantidad" name="EspaBolgonesaCantidad" value="0" min="0" disabled onchange="calcularTotal()"></div><div class="descripcion">Pasta · Salsa Bolognesa · Parmesano. Incluye Pan al Ajillo.</div></div>
+    <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="EspaMixto" value="Espaguetti Mixto" onchange="toggleCantidad(this);toggleDescripcion(this)"><label>Mixto</label><span>$30.000</span><input type="number" class="cantidad" name="EspaMixtoCantidad" value="0" min="0" disabled onchange="calcularTotal()"></div><div class="descripcion">Pasta · Salsa Bolognesa · Pollo Champiñón · Parmesano. Incluye Pan al Ajillo.</div></div>
+    <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="EspaAlfredo" value="Espaguetti Alfredo" onchange="toggleCantidad(this);toggleDescripcion(this)"><label>Alfredo</label><span>$28.000</span><input type="number" class="cantidad" name="EspaAlfredoCantidad" value="0" min="0" disabled onchange="calcularTotal()"></div><div class="descripcion">Pasta · Salsa Blanca · Jamón · Parmesano. Incluye Pan al Ajillo.</div></div>
+    <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="EspaCarbonara" value="Espaguetti Carbonara" onchange="toggleCantidad(this);toggleDescripcion(this)"><label>Carbonara</label><span>$30.000</span><input type="number" class="cantidad" name="EspaCarbonaraCantidad" value="0" min="0" disabled onchange="calcularTotal()"></div><div class="descripcion">Pasta · Salsa Blanca · Tocineta · Parmesano. Incluye Pan al Ajillo.</div></div>
+    <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="EspaMarinera" value="Espaguetti Marinera" onchange="toggleCantidad(this);toggleDescripcion(this)"><label>Marinera</label><span>$40.000</span><input type="number" class="cantidad" name="EspaMarineraCantidad" value="0" min="0" disabled onchange="calcularTotal()"></div><div class="descripcion">Pasta · Salsa Marinera · Camarones · Pescado · Palmitos · Queso Doble Crema · Parmesano. Incluye Pan al Ajillo.</div></div>
+  </div>
+</section>
+
+<!-- ===== 12. PATACÓN RELLENO ===== -->
+<section class="menu-section">
+  <h2 onclick="toggleMenu(this)">🍌 Patacón Relleno</h2>
+  <div class="platos">
+    <div class="item">
+      <div class="item-linea">
+        <input type="checkbox" class="check-plato" name="PatRelleno" value="Patacón Relleno" onchange="toggleCantidad(this);toggleDescripcion(this)">
+        <label>Patacón Relleno</label>
+        <span>$33.000</span>
+        <input type="number" class="cantidad" name="PatRellenoCantidad" value="0" min="0" disabled onchange="calcularTotal()">
+      </div>
+      <div class="descripcion">Base de Patacón · Pollo Desmechado · Carne Desmechada · Champiñón · Chorizo · Tocineta · Hogao · Queso.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 13. PLATOS A LA CARTA — CARNE DE RES ===== -->
+<section class="menu-section">
+  <h2 onclick="toggleMenu(this)">🥩 Carne de Res — A la Carta</h2>
+  <div class="platos">
+    <div class="precio-info">
+      <p class="precio-info-title" style="color:rgba(242,237,228,0.55);font-size:10px;">Todos incluyen: Arepa de Queso · y tu elección de acompañamientos</p>
+    </div>
+    <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="CarneParrilla" value="Carne a la Parrilla" onchange="toggleCantidad(this);toggleDescripcion(this)"><label>A la Parrilla</label><span>$35.000</span><input type="number" class="cantidad" name="CarneParrillaCantidad" value="0" min="0" disabled onchange="calcularTotal()"></div><div class="descripcion">Filete 300gr · Chimichurri.<div class="acomp-wrap">🥔 Papa: <select class="sabor-acomp"><option>Francesa</option><option>Criolla</option></select> &nbsp;🥗 Ensalada: <select class="sabor-acomp"><option>De la Casa</option><option>Tropical</option></select></div></div></div>
+    <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="CarneGratinada" value="Carne Gratinada" onchange="toggleCantidad(this);toggleDescripcion(this)"><label>Gratinada</label><span>$35.000</span><input type="number" class="cantidad" name="CarneGratinadaCantidad" value="0" min="0" disabled onchange="calcularTotal()"></div><div class="descripcion">Filete 300gr · Queso Mozarella.<div class="acomp-wrap">🥔 Papa: <select class="sabor-acomp"><option>Francesa</option><option>Criolla</option></select> &nbsp;🥗 Ensalada: <select class="sabor-acomp"><option>De la Casa</option><option>Tropical</option></select></div></div></div>
+    <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="CarneRanchera" value="Carne Ranchera" onchange="toggleCantidad(this);toggleDescripcion(this)"><label>Ranchera</label><span>$42.000</span><input type="number" class="cantidad" name="CarneRancheraCantidad" value="0" min="0" disabled onchange="calcularTotal()"></div><div class="descripcion">Filete 300gr · Queso Mozarella · Chorizo · Tocineta.<div class="acomp-wrap">🥔 Papa: <select class="sabor-acomp"><option>Francesa</option><option>Criolla</option></select> &nbsp;🥗 Ensalada: <select class="sabor-acomp"><option>De la Casa</option><option>Tropical</option></select></div></div></div>
+  </div>
+</section>
+
+<!-- ===== 14. LOMO DE CERDO ===== -->
+<section class="menu-section">
+  <h2 onclick="toggleMenu(this)">🐷 Lomo de Cerdo</h2>
+  <div class="platos">
+    <div class="precio-info">
+      <p class="precio-info-title" style="color:rgba(242,237,228,0.55);font-size:10px;">Todos incluyen: Arepa de Queso · y tu elección de acompañamientos</p>
+    </div>
+    <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="LomoPlancha" value="Lomo de Cerdo a la Plancha" onchange="toggleCantidad(this);toggleDescripcion(this)"><label>A la Plancha</label><span>$33.000</span><input type="number" class="cantidad" name="LomoPlanchaCantidad" value="0" min="0" disabled onchange="calcularTotal()"></div><div class="descripcion">Filete de Cerdo 300gr a la plancha.<div class="acomp-wrap">🥔 Papa: <select class="sabor-acomp"><option>Francesa</option><option>Criolla</option></select> &nbsp;🥗 Ensalada: <select class="sabor-acomp"><option>De la Casa</option><option>Tropical</option></select></div></div></div>
+    <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="LomoNapolitano" value="Lomo de Cerdo Napolitano" onchange="toggleCantidad(this);toggleDescripcion(this)"><label>Napolitano</label><span>$37.000</span><input type="number" class="cantidad" name="LomoNapolitanoCantidad" value="0" min="0" disabled onchange="calcularTotal()"></div><div class="descripcion">Filete de Cerdo 300gr · Gratinado con Tomate Fresco · Orégano.<div class="acomp-wrap">🥔 Papa: <select class="sabor-acomp"><option>Francesa</option><option>Criolla</option></select> &nbsp;🥗 Ensalada: <select class="sabor-acomp"><option>De la Casa</option><option>Tropical</option></select></div></div></div>
+    <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="LomoMexicano" value="Lomo de Cerdo Mexicano" onchange="toggleCantidad(this);toggleDescripcion(this)"><label>Mexicano</label><span>$37.000</span><input type="number" class="cantidad" name="LomoMexicanoCantidad" value="0" min="0" disabled onchange="calcularTotal()"></div><div class="descripcion">Filete de Cerdo 300gr · Salteado con Vegetales · Jalapeños · Chedar · Tacos.<div class="acomp-wrap">🥔 Papa: <select class="sabor-acomp"><option>Francesa</option><option>Criolla</option></select> &nbsp;🥗 Ensalada: <select class="sabor-acomp"><option>De la Casa</option><option>Tropical</option></select></div></div></div>
+  </div>
+</section>
+
+<!-- ===== 15. PECHUGA ===== -->
+<section class="menu-section">
+  <h2 onclick="toggleMenu(this)">🍗 Pechuga</h2>
+  <div class="platos">
+    <div class="precio-info">
+      <p class="precio-info-title" style="color:rgba(242,237,228,0.55);font-size:10px;">Todos incluyen: Arepa de Queso · y tu elección de acompañamientos</p>
+    </div>
+    <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="PechugaPlancha" value="Pechuga a la Plancha" onchange="toggleCantidad(this);toggleDescripcion(this)"><label>A la Plancha</label><span>$33.000</span><input type="number" class="cantidad" name="PechugaPlanchaCantidad" value="0" min="0" disabled onchange="calcularTotal()"></div><div class="descripcion">Filete de Pechuga 280gr a la plancha.<div class="acomp-wrap">🥔 Papa: <select class="sabor-acomp"><option>Francesa</option><option>Criolla</option></select> &nbsp;🥗 Ensalada: <select class="sabor-acomp"><option>De la Casa</option><option>Tropical</option></select></div></div></div>
+    <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="PechugaNapolitana" value="Pechuga Napolitana" onchange="toggleCantidad(this);toggleDescripcion(this)"><label>Napolitana</label><span>$35.000</span><input type="number" class="cantidad" name="PechugaNapolitanaCantidad" value="0" min="0" disabled onchange="calcularTotal()"></div><div class="descripcion">Filete de Pechuga 280gr · Gratinada con Tomate Fresco · Orégano.<div class="acomp-wrap">🥔 Papa: <select class="sabor-acomp"><option>Francesa</option><option>Criolla</option></select> &nbsp;🥗 Ensalada: <select class="sabor-acomp"><option>De la Casa</option><option>Tropical</option></select></div></div></div>
+    <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="PechugaRanchera" value="Pechuga Ranchera" onchange="toggleCantidad(this);toggleDescripcion(this)"><label>Ranchera</label><span>$39.000</span><input type="number" class="cantidad" name="PechugaRancheraCantidad" value="0" min="0" disabled onchange="calcularTotal()"></div><div class="descripcion">Filete de Pechuga 280gr · Gratinada · Chorizo · Tocineta.<div class="acomp-wrap">🥔 Papa: <select class="sabor-acomp"><option>Francesa</option><option>Criolla</option></select> &nbsp;🥗 Ensalada: <select class="sabor-acomp"><option>De la Casa</option><option>Tropical</option></select></div></div></div>
+    <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="PechugaChampinon" value="Pechuga en Champiñón" onchange="toggleCantidad(this);toggleDescripcion(this)"><label>En Champiñón</label><span>$37.000</span><input type="number" class="cantidad" name="PechugaChampínonCantidad" value="0" min="0" disabled onchange="calcularTotal()"></div><div class="descripcion">Filete de Pechuga 280gr · Gratinada con Salsa de Champiñón.<div class="acomp-wrap">🥔 Papa: <select class="sabor-acomp"><option>Francesa</option><option>Criolla</option></select> &nbsp;🥗 Ensalada: <select class="sabor-acomp"><option>De la Casa</option><option>Tropical</option></select></div></div></div>
+  </div>
+</section>
+
+<!-- ===== 16. OTRAS CARNES ===== -->
+<section class="menu-section">
+  <h2 onclick="toggleMenu(this)">🔥 Otras Carnes</h2>
+  <div class="platos">
+    <div class="precio-info">
+      <p class="precio-info-title" style="color:rgba(242,237,228,0.55);font-size:10px;">Todos incluyen: Arepa de Queso · y tu elección de acompañamientos</p>
+    </div>
+    <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="Churrasco" value="Churrasco" onchange="toggleCantidad(this);toggleDescripcion(this)"><label>Churrasco</label><span>$42.000</span><input type="number" class="cantidad" name="ChurrascoCantidad" value="0" min="0" disabled onchange="calcularTotal()"></div><div class="descripcion">Filete de Chatas 300gr.<div class="acomp-wrap">🥔 Papa: <select class="sabor-acomp"><option>Francesa</option><option>Criolla</option></select> &nbsp;🥗 Ensalada: <select class="sabor-acomp"><option>De la Casa</option><option>Tropical</option></select></div></div></div>
+    <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="PuntaAnca" value="Punta de Anca" onchange="toggleCantidad(this);toggleDescripcion(this)"><label>Punta de Anca</label><span>$42.000</span><input type="number" class="cantidad" name="PuntaAncaCantidad" value="0" min="0" disabled onchange="calcularTotal()"></div><div class="descripcion">Filete 300gr.<div class="acomp-wrap">🥔 Papa: <select class="sabor-acomp"><option>Francesa</option><option>Criolla</option></select> &nbsp;🥗 Ensalada: <select class="sabor-acomp"><option>De la Casa</option><option>Tropical</option></select></div></div></div>
+    <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="Parrillada" value="Parrillada" onchange="toggleCantidad(this);toggleDescripcion(this)"><label>Parrillada</label><span>$50.000</span><input type="number" class="cantidad" name="ParrilladaCantidad" value="0" min="0" disabled onchange="calcularTotal()"></div><div class="descripcion">130gr Res · 130gr Pechuga · 130gr Lomo Cerdo · 1 Chorizo Parrillero · 1 Morcilla.<div class="acomp-wrap">🥔 Papa: <select class="sabor-acomp"><option>Francesa</option><option>Criolla</option></select> &nbsp;🥗 Ensalada: <select class="sabor-acomp"><option>De la Casa</option><option>Tropical</option></select></div></div></div>
+    <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="CostillasBBQ" value="Costillas BBQ" onchange="toggleCantidad(this);toggleDescripcion(this)"><label>Costillas BBQ</label><span>$35.000</span><input type="number" class="cantidad" name="CostillasBBQCantidad" value="0" min="0" disabled onchange="calcularTotal()"></div><div class="descripcion">Costilla de Cerdo 350gr.<div class="acomp-wrap">🥔 Papa: <select class="sabor-acomp"><option>Francesa</option><option>Criolla</option></select> &nbsp;🥗 Ensalada: <select class="sabor-acomp"><option>De la Casa</option><option>Tropical</option></select></div></div></div>
+    <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="Chicharron" value="Chicharrón" onchange="toggleCantidad(this);toggleDescripcion(this)"><label>Chicharrón</label><span>$30.000</span><input type="number" class="cantidad" name="ChicharronCantidad" value="0" min="0" disabled onchange="calcularTotal()"></div><div class="descripcion">Chicharrón de cerdo.<div class="acomp-wrap">🥔 Papa: <select class="sabor-acomp"><option>Francesa</option><option>Criolla</option></select></div></div></div>
+  </div>
+</section>
+
+<!-- ===== 17. MENÚ INFANTIL ===== -->
+<section class="menu-section">
+  <h2 onclick="toggleMenu(this)">🧒 Menú Infantil</h2>
+  <div class="platos">
+    <div class="item">
+      <div class="item-linea">
+        <input type="checkbox" class="check-plato" name="MenuInfantil" value="Menú Infantil" onchange="toggleCantidad(this);toggleDescripcion(this)">
+        <label>Menú Infantil</label>
+        <select class="sabor"><option>Pizza</option><option>Perro Caliente</option><option>Hamburguesa</option><option>Salchipapa</option></select>
+        <span>$30.000</span>
+        <input type="number" class="cantidad" name="MenuInfantilCantidad" value="0" min="0" disabled onchange="calcularTotal()">
+      </div>
+      <div class="descripcion">Incluye: Papas Francesa · Jugo en Caja · Huevo Sorpresa.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 18. PESCADOS ===== -->
+<section class="menu-section">
+  <h2 onclick="toggleMenu(this)">🐟 Pescados</h2>
+  <div class="platos">
+    <div class="precio-info">
+      <p class="precio-info-title" style="color:rgba(242,237,228,0.55);font-size:10px;">Incluyen tu elección de acompañamientos</p>
+    </div>
+    <div class="item">
+      <div class="item-linea">
+        <input type="checkbox" class="check-plato" name="TruchaPrep" value="Trucha" onchange="toggleCantidad(this);toggleDescripcion(this)">
+        <label>Trucha</label>
+        <select class="sabor"><option>A la Plancha</option><option>Al Ajillo</option><option>en Champiñón</option></select>
+        <span>$40.000</span>
+        <input type="number" class="cantidad" name="TruchaPrepCantidad" value="0" min="0" disabled onchange="calcularTotal()">
+      </div>
+      <div class="descripcion">Trucha 300gr en la preparación seleccionada.<div class="acomp-wrap">🥔 Papa: <select class="sabor-acomp"><option>Francesa</option><option>Criolla</option><option>Patacón</option></select> &nbsp;🥗 Ensalada: <select class="sabor-acomp"><option>De la Casa</option><option>Tropical</option></select></div></div>
+    </div>
+    <div class="item">
+      <div class="item-linea">
+        <input type="checkbox" class="check-plato" name="TruchaMarinera" value="Trucha Marinera" onchange="toggleCantidad(this);toggleDescripcion(this)">
+        <label>Trucha Marinera</label>
+        <span>$46.000</span>
+        <input type="number" class="cantidad" name="TruchaMarineraCantidad" value="0" min="0" disabled onchange="calcularTotal()">
+      </div>
+      <div class="descripcion">Trucha 300gr bañada en Salsa Marinera.<div class="acomp-wrap">🥔 Papa: <select class="sabor-acomp"><option>Francesa</option><option>Criolla</option><option>Patacón</option></select> &nbsp;🥗 Ensalada: <select class="sabor-acomp"><option>De la Casa</option><option>Tropical</option></select></div></div>
+    </div>
+    <div class="item">
+      <div class="item-linea">
+        <input type="checkbox" class="check-plato" name="SalmonPrep" value="Salmón" onchange="toggleCantidad(this);toggleDescripcion(this)">
+        <label>Salmón</label>
+        <select class="sabor"><option>A la Plancha</option><option>Al Ajillo</option><option>en Champiñón</option></select>
+        <span>$52.000</span>
+        <input type="number" class="cantidad" name="SalmonPrepCantidad" value="0" min="0" disabled onchange="calcularTotal()">
+      </div>
+      <div class="descripcion">Filete de Salmón 250gr en la preparación seleccionada.<div class="acomp-wrap">🥔 Papa: <select class="sabor-acomp"><option>Francesa</option><option>Criolla</option><option>Patacón</option></select> &nbsp;🥗 Ensalada: <select class="sabor-acomp"><option>De la Casa</option><option>Tropical</option></select></div></div>
+    </div>
+    <div class="item">
+      <div class="item-linea">
+        <input type="checkbox" class="check-plato" name="SalmonMarinero" value="Salmón Marinero" onchange="toggleCantidad(this);toggleDescripcion(this)">
+        <label>Salmón Marinero</label>
+        <span>$60.000</span>
+        <input type="number" class="cantidad" name="SalmonMarineroCantidad" value="0" min="0" disabled onchange="calcularTotal()">
+      </div>
+      <div class="descripcion">Filete de Salmón 250gr bañado en Salsa Marinera.<div class="acomp-wrap">🥔 Papa: <select class="sabor-acomp"><option>Francesa</option><option>Criolla</option><option>Patacón</option></select> &nbsp;🥗 Ensalada: <select class="sabor-acomp"><option>De la Casa</option><option>Tropical</option></select></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 19. BEBIDAS ===== -->
+<section class="menu-section">
+  <h2 onclick="toggleMenu(this)">🥤 Bebidas</h2>
+  <div class="platos">
+    <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="Gas250" value="Gaseosa Personal 250ml" onchange="toggleCantidad(this);toggleDescripcion(this)"><label>Gaseosa Personal 250ml</label><span>$3.000</span><input type="number" class="cantidad" name="Gas250Cantidad" value="0" min="0" disabled onchange="calcularTotal()"></div></div>
+    <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="Gas400" value="Gaseosa Personal 400ml" onchange="toggleCantidad(this);toggleDescripcion(this)"><label>Gaseosa Personal 400ml</label><span>$4.500</span><input type="number" class="cantidad" name="Gas400Cantidad" value="0" min="0" disabled onchange="calcularTotal()"></div></div>
+    <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="Gas500" value="Gaseosa Personal 500ml" onchange="toggleCantidad(this);toggleDescripcion(this)"><label>Gaseosa Personal 500ml</label><span>$5.500</span><input type="number" class="cantidad" name="Gas500Cantidad" value="0" min="0" disabled onchange="calcularTotal()"></div></div>
+    <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="Agua" value="Agua Botella Personal" onchange="toggleCantidad(this);toggleDescripcion(this)"><label>Agua Botella Personal (Natural o Gas)</label><span>$3.000</span><input type="number" class="cantidad" name="AguaCantidad" value="0" min="0" disabled onchange="calcularTotal()"></div></div>
+    <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="AguaSab" value="Agua Botella Saborizada" onchange="toggleCantidad(this);toggleDescripcion(this)"><label>Agua Botella Saborizada</label><span>$4.000</span><input type="number" class="cantidad" name="AguaSabCantidad" value="0" min="0" disabled onchange="calcularTotal()"></div></div>
+    <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="Gas15" value="Gaseosa 1.5L" onchange="toggleCantidad(this);toggleDescripcion(this)"><label>Gaseosa 1.5 L</label><span>$9.000</span><input type="number" class="cantidad" name="Gas15Cantidad" value="0" min="0" disabled onchange="calcularTotal()"></div></div>
+    <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="Gas30" value="Gaseosa 3.0L" onchange="toggleCantidad(this);toggleDescripcion(this)"><label>Gaseosa 3.0 L</label><span>$12.000</span><input type="number" class="cantidad" name="Gas30Cantidad" value="0" min="0" disabled onchange="calcularTotal()"></div></div>
+    <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="JugoLeche" value="Jugo en Leche" onchange="toggleCantidad(this);toggleDescripcion(this)"><label>Jugo en Leche</label><span>$9.000</span><input type="number" class="cantidad" name="JugoLecheCantidad" value="0" min="0" disabled onchange="calcularTotal()"></div></div>
+    <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="JugoAgua" value="Jugo en Agua / Limonada Natural" onchange="toggleCantidad(this);toggleDescripcion(this)"><label>Jugo en Agua o Limonada Natural</label><span>$7.000</span><input type="number" class="cantidad" name="JugoAguaCantidad" value="0" min="0" disabled onchange="calcularTotal()"></div></div>
+    <div class="item">
+      <div class="item-linea">
+        <input type="checkbox" class="check-plato" name="Limonada" value="Limonada Especial" onchange="toggleCantidad(this);toggleDescripcion(this)">
+        <label>Limonada Especial</label>
+        <select class="sabor"><option>Coco</option><option>Cerezada</option><option>Mango</option><option>Fresa</option></select>
+        <span>$12.000</span>
+        <input type="number" class="cantidad" name="LimonadaCantidad" value="0" min="0" disabled onchange="calcularTotal()">
+      </div>
+      <div class="descripcion">Limonada especial en el sabor seleccionado.</div>
+    </div>
+    <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="TeHatsu" value="Té Hatsu" onchange="toggleCantidad(this);toggleDescripcion(this)"><label>Té Hatsu</label><span>$7.000</span><input type="number" class="cantidad" name="TeHatsuCantidad" value="0" min="0" disabled onchange="calcularTotal()"></div></div>
+    <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="CervClub" value="Cerveza Club Colombia" onchange="toggleCantidad(this);toggleDescripcion(this)"><label>Cerveza Club Colombia</label><span>$6.000</span><input type="number" class="cantidad" name="CervClubCantidad" value="0" min="0" disabled onchange="calcularTotal()"></div></div>
+    <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="CervHeineken" value="Cerveza Heineken" onchange="toggleCantidad(this);toggleDescripcion(this)"><label>Cerveza Heineken</label><span>$6.000</span><input type="number" class="cantidad" name="CervHeinekenCantidad" value="0" min="0" disabled onchange="calcularTotal()"></div></div>
+    <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="CervCorona" value="Cerveza Corona" onchange="toggleCantidad(this);toggleDescripcion(this)"><label>Cerveza Corona</label><span>$9.000</span><input type="number" class="cantidad" name="CervCoronaCantidad" value="0" min="0" disabled onchange="calcularTotal()"></div></div>
+  </div>
+</section>
+
+<!-- ===== 20. ADICIONES ===== -->
+<section class="menu-section">
+  <h2 onclick="toggleMenu(this)">➕ Adiciones</h2>
+  <div class="platos">
+    <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="AdicPapa" value="Porción de Papa" onchange="toggleCantidad(this);toggleDescripcion(this)"><label>Porción de Papa</label><span>$8.000</span><input type="number" class="cantidad" name="AdicPapaCantidad" value="0" min="0" disabled onchange="calcularTotal()"></div></div>
+    <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="AdicHuevo" value="Porción Huevo de Codorniz" onchange="toggleCantidad(this);toggleDescripcion(this)"><label>Porción de Huevo de Codorniz</label><span>$9.000</span><input type="number" class="cantidad" name="AdicHuevoCantidad" value="0" min="0" disabled onchange="calcularTotal()"></div></div>
+    <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="AdicPan" value="Porción de Pan" onchange="toggleCantidad(this);toggleDescripcion(this)"><label>Porción de Pan</label><span>$4.000</span><input type="number" class="cantidad" name="AdicPanCantidad" value="0" min="0" disabled onchange="calcularTotal()"></div></div>
+    <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="AdicYuca" value="Porción de Yuca" onchange="toggleCantidad(this);toggleDescripcion(this)"><label>Porción de Yuca</label><span>$6.000</span><input type="number" class="cantidad" name="AdicYucaCantidad" value="0" min="0" disabled onchange="calcularTotal()"></div></div>
+    <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="AdicEnsalada" value="Porción de Ensalada" onchange="toggleCantidad(this);toggleDescripcion(this)"><label>Porción de Ensalada</label><span>$6.000</span><input type="number" class="cantidad" name="AdicEnsaladaCantidad" value="0" min="0" disabled onchange="calcularTotal()"></div></div>
+  </div>
+</section>
+
+<!-- ===== FORMULARIO CLIENTE ===== -->
+<section class="menu-section form-section">
+  <h2>📝 Detalles del Cliente</h2>
+  <div class="form-body">
+
+    <div class="form-group">
+      <label for="nombre">👤 Nombre</label>
+      <input type="text" id="nombre" name="nombre" required placeholder="Tu nombre completo">
+    </div>
+
+    <div class="form-group">
+      <label for="telefono">📞 Número de WhatsApp</label>
+      <input type="tel" id="telefono" name="telefono" required placeholder="Ej: 3001234567">
+    </div>
+
+    <div class="form-group">
+      <label for="tipoEntrega">📦 Tipo de entrega</label>
+      <select id="tipoEntrega" name="tipoEntrega" required onchange="actualizarEntrega(); calcularTotal()">
+        <option value="">— Selecciona —</option>
+        <option value="Recoger en el local">Recoger en el local</option>
+        <option value="A domicilio">A domicilio</option>
+        <option value="Comer dentro del local">Comer dentro del local</option>
+      </select>
+    </div>
+
+    <div id="direccionField" style="display:none;">
+      <div class="form-group">
+        <label>🗺️ Zona y Barrio</label>
+        <div style="display:flex; gap:8px; margin-bottom:8px;">
+<select id="zonaSelect" name="zonaSelect" onchange="calcularTotal(); actualizarPlaceholderDireccion()" style="flex:1;">
+          <option value="0">— Selecciona tu zona —</option>
+          <option value="3000">Funza — $3.000</option>
+          <option value="4000">Mosquera — $4.000</option>
+          <option value="6000">Diamante / Lucero / Sol — $6.000</option>
+          <option value="8000">Bodegas — $8.000</option>
+        </select>
+        <input type="text" id="barrioCliente" name="barrioCliente" placeholder="Tu barrio" style="flex:1;">
+</div>
+      </div>
+      <div id="tarjetaDomicilio" style="display:none; background:rgba(245,166,35,0.07); border:1px solid rgba(245,166,35,0.25); border-radius:6px; padding:9px 13px; margin-bottom:10px; font-size:12px; color:rgba(242,237,228,0.75);">
+        🛵 El costo del domicilio para esta zona se sumará automáticamente al total.
+      </div>
+      <div class="form-group">
+        <label for="direccion">📍 Dirección</label>
+        <input type="text" id="direccion" name="direccion" placeholder="Ej: Calle 10 #6-25">
+      </div>
+    </div>
+
+    <div id="mesaField" style="display:none;">
+      <div class="form-group">
+        <label for="numeroMesa">🔢 Número de mesa</label>
+        <input type="text" id="numeroMesa" name="numeroMesa" placeholder="Ej: Mesa 3">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="tipoPago">💰 Tipo de pago</label>
+      <select id="tipoPago" name="tipoPago" required onchange="actualizarPago()">
+        <option value="">— Selecciona —</option>
+        <option value="Efectivo">Efectivo</option>
+        <option value="Nequi">Nequi</option>
+        <option value="Bancolombia">Bancolombia</option>
+        <option value="Tarjeta">Tarjeta</option>
+      </select>
+    </div>
+
+    <div id="efectivoField" style="display:none;">
+      <div class="form-group">
+        <label for="efectivoCliente">💵 ¿Con cuánto pagará?</label>
+        <small>Ayuda a preparar el cambio exacto 🙏</small>
+        <input type="text" id="efectivoCliente" name="efectivoMonto" placeholder="Ej: $50.000">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="especificaciones">📒 Especificaciones</label>
+      <textarea id="especificaciones" name="especificaciones" rows="3" placeholder="Ej: sin cebolla, sabores de pizza, cambio de pan..."></textarea>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== TOTAL ===== -->
+<section class="menu-section total-section">
+  <h2>💸 Total: <span id="total">$0</span></h2>
+  <input type="hidden" name="totalPedido" id="totalPedido" value="0">
+
+  <label class="confirm-label">
+    <input type="checkbox" id="confirmPedido" required>
+    ✅ Autorizo el tratamiento de mis datos personales para gestionar este pedido.
+  </label>
+
+  <button type="submit" class="btn">📲 Enviar Pedido por WhatsApp</button>
+</section>
+
+</form>
+
+<footer>
+  <p>Pizzería <strong>Maranatha</strong> · Alimentando Multitudes · 📞 320 894 0361</p>
+  <p style="margin-top:5px; opacity:0.6;">Menú digital por <strong>AIMAX STUDIO</strong></p>
+</footer>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
