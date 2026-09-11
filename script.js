@@ -463,17 +463,17 @@ function aplicarPromociones() {
     banner.innerHTML = `
       <div style="background:linear-gradient(135deg,rgba(212,43,43,0.2),rgba(245,166,35,0.15));border:1px solid rgba(245,166,35,0.5);border-radius:8px;padding:14px 16px;margin-bottom:12px;text-align:center;">
         <div style="font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:3px;color:#f5a623;">🍕 JUEVES DE PIZZA</div>
-        <div style="font-size:13px;color:rgba(242,237,228,0.85);margin-top:6px;line-height:1.6;">Todas las porciones de pizza <strong style="color:#ffd84d;">a solo $8.000</strong><br><span style="font-size:11px;opacity:0.6;">Solo aplica para porciones individuales</span></div>
+        <div style="font-size:13px;color:rgba(242,237,228,0.85);margin-top:6px;line-height:1.6;">Todas las porciones de pizza <strong style="color:#ffd84d;">a solo $9.000</strong><br><span style="font-size:11px;opacity:0.6;">Solo aplica para porciones individuales</span></div>
       </div>`;
 
-    // Bajar porciones a $8.000
+    // Bajar porciones a $9.000
     const porcioneNames = ['PizzaPorcionHawaiana','PizzaPorcionCarnes','PizzaPorcionPollo','PizzaPorcionMexicana'];
     porcioneNames.forEach(name => {
       const cb = document.querySelector(`input[name="${name}"]`);
       if (!cb) return;
       const span = cb.closest('.item-linea')?.querySelector('span');
-      if (span) span.textContent = '$8.000 🔥';
-      PRECIOS[name] = 8000;
+      if (span) span.textContent = '$9.000 🔥';
+      PRECIOS[name] = 9000;
     });
   }
 
