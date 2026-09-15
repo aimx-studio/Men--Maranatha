@@ -433,16 +433,16 @@ function aplicarPromociones() {
     banner.innerHTML = `
       <div style="background:linear-gradient(135deg,rgba(212,43,43,0.2),rgba(245,166,35,0.15));border:1px solid rgba(245,166,35,0.5);border-radius:8px;padding:14px 16px;margin-bottom:12px;text-align:center;">
         <div style="font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:3px;color:#f5a623;">🍔 MARTES DE HAMBURGUESAS</div>
-        <div style="font-size:13px;color:rgba(242,237,228,0.85);margin-top:6px;line-height:1.6;">Cualquier combo con papas y Coca-Cola 250ml <strong style="color:#ffd84d;">a solo $25.000</strong><br><span style="font-size:11px;opacity:0.6;">No aplica para Maranatha Doble</span></div>
+        <div style="font-size:13px;color:rgba(242,237,228,0.85);margin-top:6px;line-height:1.6;">Cualquier combo con papas y Coca-Cola 250ml <strong style="color:#ffd84d;">a solo $27.000</strong><br><span style="font-size:11px;opacity:0.6;">No aplica para Maranatha Doble</span></div>
       </div>`;
 
     // Bajar precios combo a $25.000
     const promos = {
-      HambColombiana: 25000,
-      HambMexicana: 25000,
-      HambArgentina: 25000,
-      HambAmericana: 25000,
-      HambMaranatha: 25000,
+      HambColombiana: 27000,
+      HambMexicana: 27000,
+      HambArgentina: 27000,
+      HambAmericana: 27000,
+      HambMaranatha: 27000,
     };
 
     document.querySelectorAll('.check-plato').forEach(cb => {
@@ -452,7 +452,7 @@ function aplicarPromociones() {
       [...tamano.options].forEach(opt => {
         if (opt.text.toLowerCase().includes('combo')) {
           opt.value = promos[cb.name];
-          opt.text = `Combo Papas+Gaseosa — $25.000 🔥`;
+          opt.text = `Combo Papas+Gaseosa — $27.000 🔥`;
         }
       });
     });
