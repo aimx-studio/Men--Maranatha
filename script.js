@@ -10,15 +10,18 @@ PizzaPersonal:19900, PizzaSmall:58000, PizzaMedium:70000, PizzaExtraGrande:99000
   LasagnaPolloChampinon:32000, LasagnaMaranatha:33000, LasagnaMarinera:38500,
   EspaBolognesa:29000, EspaMixto:33000, EspaAlfredo:31000, EspaCarbonara:33000, EspaMarinera:44000,
   PatRelleno:37000,
+  CrepeStroganoff:28000, CrepePolloChampinon:28000, CrepeMarinero:28000,
+  AreTipica:18000, AreMexicana:18000, ArePolloChampinon:18000, AreMaranatha:18000,
+  Chicharronada:45000,
   CarneParrilla:38000, CarneGratinada:40000, CarneRanchera:45000,
   LomoPlancha:36000, LomoNapolitano:40000, LomoMexicano:40000,
   PechugaPlancha:36000, PechugaNapolitana:40000, PechugaRanchera:40000, PechugaChampinon:40000,
   Churrasco:47000, PuntaAnca:47000, Parrillada:60000, CostillasBBQ:36000, Chicharron:33000,
   MenuInfantil:33000,
   TruchaPrep:44000, TruchaMarinera:48500, SalmonPrep:57000, SalmonMarinero:66000,
-  Gas250:3000, Gas400:4500, Gas500:5500, Agua:3000, AguaSab:4000,
+  Gas250:3000, Gas400:4500, Agua:3000, AguaSab:4000,
   Gas15:9000, Gas30:12000, JugoLeche:10000, JugoAgua:7000, Limonada:12000,
-  TeHatsu:7000, CervClub:6000, CervHeineken:6000, CervCorona:9000,
+  TeHatsu:7000, CervClub:6000, CervCorona:9000, SodaSab:12000, Malteada:15000,
   AdicPapa:8000, AdicHuevo:9000, AdicPan:4000, AdicYuca:6000, AdicEnsalada:6000
 };
 

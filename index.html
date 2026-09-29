@@ -433,10 +433,10 @@
         <input type="checkbox" class="check-plato" name="HambSencilla" value="Hamburguesa Sencilla" onchange="toggleCantidad(this);toggleDescripcion(this)">
         <label>Sencilla</label>
         <select class="tamano" onchange="calcularTotal()">
-          <option value="18000">Solo — $18.000</option>
-          <option value="25000">Combo Papas+Gaseosa — $25.000</option>
+          <option value="20000">Solo — $20.000</option>
+          <option value="27500">Combo Papas+Gaseosa — $27.500</option>
         </select>
-        <span>$18.000</span>
+        <span>$20.000</span>
         <input type="number" class="cantidad" name="HambSencillaCantidad" value="0" min="0" disabled onchange="calcularTotal()">
       </div>
       <div class="descripcion">Carne de Res · Queso · Lechuga · Tomate.</div>
@@ -446,10 +446,10 @@
         <input type="checkbox" class="check-plato" name="HambColombiana" value="Hamburguesa Colombiana" onchange="toggleCantidad(this);toggleDescripcion(this)">
         <label>Colombiana</label>
         <select class="tamano" onchange="calcularTotal()">
-          <option value="26000">Solo — $26.000</option>
-          <option value="35000">Combo Papas+Gaseosa — $35.000</option>
+          <option value="28500">Solo — $28.500</option>
+          <option value="38500">Combo Papas+Gaseosa — $38.500</option>
         </select>
-        <span>$26.000</span>
+        <span>$28.500</span>
         <input type="number" class="cantidad" name="HambColombianaCantidad" value="0" min="0" disabled onchange="calcularTotal()">
       </div>
       <div class="descripcion">Carne de Res · Tocineta · Huevo Frito · Cebolla Grille · Maduro · Queso · Hogao.</div>
@@ -519,7 +519,7 @@
       </div>
       <div class="descripcion">Carne de Res x2 · Lechuga · Cebolla Grille BBQ · Tomate · Champiñón · Pollo Desmechado · Huevo de Codorniz · Tocineta · Chorizo · Chedar · Queso Mozarella.</div>
     </div>
-    <div class="nota-item">💡 Puedes cambiar el pan por Plátano Maduro o Arepa +$6.000 — indícalo en Especificaciones</div>
+    <div class="nota-item">💡 Puedes cambiar el pan por Plátano Maduro o Arepa +$7.000 — indícalo en Especificaciones</div>
   </div>
 </section>
 
@@ -716,6 +716,19 @@
   </div>
 </section>
 
+<!-- ===== CREPES ===== -->
+<section class="menu-section">
+  <h2 onclick="toggleMenu(this)">🥞 Crepes</h2>
+  <div class="platos">
+    <div class="precio-info">
+      <p class="precio-info-title" style="color:rgba(242,237,228,0.55);font-size:10px;">Todos los crepes van acompañados de ensalada tentación (Espinaca + Fresas + Vinagreta de Yogurt)</p>
+    </div>
+    <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="CrepeStroganoff" value="Crepe Stroganoff" onchange="toggleCantidad(this);toggleDescripcion(this)"><label>Stroganoff</label><span>$28.000</span><input type="number" class="cantidad" name="CrepeStroganoffCantidad" value="0" min="0" disabled onchange="calcularTotal()"></div><div class="descripcion">Carne de Res con Salsa Stroganoff (a base de Champiñón y Pimentón) · Cebolla.</div></div>
+    <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="CrepePolloChampinon" value="Crepe Pollo Champiñón" onchange="toggleCantidad(this);toggleDescripcion(this)"><label>Pollo Champiñón</label><span>$28.000</span><input type="number" class="cantidad" name="CrepePolloChampinonCantidad" value="0" min="0" disabled onchange="calcularTotal()"></div><div class="descripcion">Pollo con Salsa de Champiñón · Queso.</div></div>
+    <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="CrepeMarinero" value="Crepe Marinero" onchange="toggleCantidad(this);toggleDescripcion(this)"><label>Marinero</label><span>$28.000</span><input type="number" class="cantidad" name="CrepeMarineroCantidad" value="0" min="0" disabled onchange="calcularTotal()"></div><div class="descripcion">Camarones · Palmitos · Trocitos de Pescado en Salsa Marinera · Queso.</div></div>
+  </div>
+</section>
+
 <!-- ===== 11. ESPAGUETTI ===== -->
 <section class="menu-section">
   <h2 onclick="toggleMenu(this)">🍝 Espaguetti</h2>
@@ -743,6 +756,17 @@
       </div>
       <div class="descripcion">Base de Patacón · Pollo Desmechado · Carne Desmechada · Champiñón · Chorizo · Tocineta · Hogao · Queso.</div>
     </div>
+  </div>
+</section>
+
+<!-- ===== AREPAS RELLENAS ===== -->
+<section class="menu-section">
+  <h2 onclick="toggleMenu(this)">🫓 Arepas Rellenas</h2>
+  <div class="platos">
+    <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="AreTipica" value="Arepa Rellena Típica" onchange="toggleCantidad(this);toggleDescripcion(this)"><label>Típica</label><span>$18.000</span><input type="number" class="cantidad" name="AreTipicaCantidad" value="0" min="0" disabled onchange="calcularTotal()"></div><div class="descripcion">Carne Desmechada · Plátano Maduro · Chicharrón · Queso.</div></div>
+    <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="AreMexicana" value="Arepa Rellena Mexicana" onchange="toggleCantidad(this);toggleDescripcion(this)"><label>Mexicana</label><span>$18.000</span><input type="number" class="cantidad" name="AreMexicanaCantidad" value="0" min="0" disabled onchange="calcularTotal()"></div><div class="descripcion">Carne Desmechada · Maíz · Guacamole · Pico de Gallo · Queso.</div></div>
+    <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="ArePolloChampinon" value="Arepa Rellena Pollo Champiñón" onchange="toggleCantidad(this);toggleDescripcion(this)"><label>Pollo Champiñón</label><span>$18.000</span><input type="number" class="cantidad" name="ArePolloChampinonCantidad" value="0" min="0" disabled onchange="calcularTotal()"></div><div class="descripcion">Pollo · Champiñón · Queso.</div></div>
+    <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="AreMaranatha" value="Arepa Rellena Maranatha" onchange="toggleCantidad(this);toggleDescripcion(this)"><label>Maranatha</label><span>$18.000</span><input type="number" class="cantidad" name="AreMaranathaCantidad" value="0" min="0" disabled onchange="calcularTotal()"></div><div class="descripcion">Pollo · Champiñón · Tocineta · Chorizo · Queso · Salsa de la Casa.</div></div>
   </div>
 </section>
 
@@ -798,6 +822,7 @@
     <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="Parrillada" value="Parrillada" onchange="toggleCantidad(this);toggleDescripcion(this)"><label>Parrillada</label><span>$60.000</span><input type="number" class="cantidad" name="ParrilladaCantidad" value="0" min="0" disabled onchange="calcularTotal()"></div><div class="descripcion">130gr Res · 130gr Pechuga · 130gr Lomo Cerdo · 1 Chorizo Parrillero · 1 Morcilla.<div class="acomp-wrap">🥔 Papa: <select class="sabor-acomp"><option>Francesa</option><option>Criolla</option></select> &nbsp;🥗 Ensalada: <select class="sabor-acomp"><option>De la Casa</option><option>Tropical</option></select></div></div></div>
     <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="CostillasBBQ" value="Costillas BBQ" onchange="toggleCantidad(this);toggleDescripcion(this)"><label>Costillas BBQ</label><span>$36.000</span><input type="number" class="cantidad" name="CostillasBBQCantidad" value="0" min="0" disabled onchange="calcularTotal()"></div><div class="descripcion">Costilla de Cerdo 350gr.<div class="acomp-wrap">🥔 Papa: <select class="sabor-acomp"><option>Francesa</option><option>Criolla</option></select> &nbsp;🥗 Ensalada: <select class="sabor-acomp"><option>De la Casa</option><option>Tropical</option></select></div></div></div>
     <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="Chicharron" value="Chicharrón" onchange="toggleCantidad(this);toggleDescripcion(this)"><label>Chicharrón</label><span>$33.000</span><input type="number" class="cantidad" name="ChicharronCantidad" value="0" min="0" disabled onchange="calcularTotal()"></div><div class="descripcion">Chicharrón de cerdo.<div class="acomp-wrap">🥔 Papa: <select class="sabor-acomp"><option>Francesa</option><option>Criolla</option></select></div></div></div>
+    <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="Chicharronada" value="Chicharronada" onchange="toggleCantidad(this);toggleDescripcion(this)"><label>Chicharronada</label><span>$45.000</span><input type="number" class="cantidad" name="ChicharronadaCantidad" value="0" min="0" disabled onchange="calcularTotal()"></div><div class="descripcion">Chicharrón de cerdo 400gr · Plátano Maduro · Arepa Boyacense.<div class="acomp-wrap">🥔 Papa: <select class="sabor-acomp"><option>Francesa</option><option>Criolla</option></select></div></div></div>
   </div>
 </section>
 
@@ -872,7 +897,7 @@
   <div class="platos">
     <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="Gas250" value="Gaseosa Personal 250ml" onchange="toggleCantidad(this);toggleDescripcion(this)"><label>Gaseosa Personal 250ml</label><span>$3.000</span><input type="number" class="cantidad" name="Gas250Cantidad" value="0" min="0" disabled onchange="calcularTotal()"></div></div>
     <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="Gas400" value="Gaseosa Personal 400ml" onchange="toggleCantidad(this);toggleDescripcion(this)"><label>Gaseosa Personal 400ml</label><span>$4.500</span><input type="number" class="cantidad" name="Gas400Cantidad" value="0" min="0" disabled onchange="calcularTotal()"></div></div>
-    <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="Gas500" value="Gaseosa Personal 500ml" onchange="toggleCantidad(this);toggleDescripcion(this)"><label>Gaseosa Personal 500ml</label><span>$5.500</span><input type="number" class="cantidad" name="Gas500Cantidad" value="0" min="0" disabled onchange="calcularTotal()"></div></div>
+    
     <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="Agua" value="Agua Botella Personal" onchange="toggleCantidad(this);toggleDescripcion(this)"><label>Agua Botella Personal (Natural o Gas)</label><span>$3.000</span><input type="number" class="cantidad" name="AguaCantidad" value="0" min="0" disabled onchange="calcularTotal()"></div></div>
     <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="AguaSab" value="Agua Botella Saborizada" onchange="toggleCantidad(this);toggleDescripcion(this)"><label>Agua Botella Saborizada</label><span>$4.000</span><input type="number" class="cantidad" name="AguaSabCantidad" value="0" min="0" disabled onchange="calcularTotal()"></div></div>
     <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="Gas15" value="Gaseosa 1.5L" onchange="toggleCantidad(this);toggleDescripcion(this)"><label>Gaseosa 1.5 L</label><span>$9.000</span><input type="number" class="cantidad" name="Gas15Cantidad" value="0" min="0" disabled onchange="calcularTotal()"></div></div>
@@ -889,9 +914,11 @@
       </div>
       <div class="descripcion">Limonada especial en el sabor seleccionado.</div>
     </div>
+    <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="SodaSab" value="Soda Saborizada" onchange="toggleCantidad(this);toggleDescripcion(this)"><label>Soda Saborizada</label><span>$12.000</span><input type="number" class="cantidad" name="SodaSabCantidad" value="0" min="0" disabled onchange="calcularTotal()"></div></div>
+    <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="Malteada" value="Malteada" onchange="toggleCantidad(this);toggleDescripcion(this)"><label>Malteada</label><span>$15.000</span><input type="number" class="cantidad" name="MalteadaCantidad" value="0" min="0" disabled onchange="calcularTotal()"></div></div>
     <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="TeHatsu" value="Té Hatsu" onchange="toggleCantidad(this);toggleDescripcion(this)"><label>Té Hatsu</label><span>$7.000</span><input type="number" class="cantidad" name="TeHatsuCantidad" value="0" min="0" disabled onchange="calcularTotal()"></div></div>
     <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="CervClub" value="Cerveza Club Colombia" onchange="toggleCantidad(this);toggleDescripcion(this)"><label>Cerveza Club Colombia</label><span>$6.000</span><input type="number" class="cantidad" name="CervClubCantidad" value="0" min="0" disabled onchange="calcularTotal()"></div></div>
-    <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="CervHeineken" value="Cerveza Heineken" onchange="toggleCantidad(this);toggleDescripcion(this)"><label>Cerveza Heineken</label><span>$6.000</span><input type="number" class="cantidad" name="CervHeinekenCantidad" value="0" min="0" disabled onchange="calcularTotal()"></div></div>
+    
     <div class="item"><div class="item-linea"><input type="checkbox" class="check-plato" name="CervCorona" value="Cerveza Corona" onchange="toggleCantidad(this);toggleDescripcion(this)"><label>Cerveza Corona</label><span>$9.000</span><input type="number" class="cantidad" name="CervCoronaCantidad" value="0" min="0" disabled onchange="calcularTotal()"></div></div>
   </div>
 </section>
